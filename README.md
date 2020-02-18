@@ -1,2 +1,3 @@
-# SpendingoJS
-SpendingoJS is an application built in React using hooks
+SpendingoJS Manage Your Budgets
+
+Build with ReactJS using Hooks
