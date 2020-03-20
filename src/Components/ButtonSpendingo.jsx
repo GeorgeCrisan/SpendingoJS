@@ -16,5 +16,5 @@ const useStyles = makeStyles({
 
 export default function ButtonSpendingo(props) {
   const classes = useStyles();
-return <Button className={classes.root}>{props.children}</Button>;
+return <Button onClick={props.onClick} className={classes.root}>{props.children}</Button>;
 }

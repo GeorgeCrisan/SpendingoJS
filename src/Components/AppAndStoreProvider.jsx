@@ -8,7 +8,7 @@ import reduxStore from "../reduxStore";
 
 const store = reduxStore();
 
-function Spendingo() {
+function AppAndStoreProvider() {
   return (
     <Provider store={store}>
       <Router>
@@ -18,4 +18,4 @@ function Spendingo() {
   );
 }
 
-export default Spendingo;
+export default AppAndStoreProvider;

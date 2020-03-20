@@ -28,9 +28,10 @@ const successLogin = user => {
   };
 };
 
-const errorLogin = () => {
+const errorLogin = (err) => {
   return {
-    type: LOGIN_FAILURE
+    type: LOGIN_FAILURE,
+    error: err
   };
 };
 

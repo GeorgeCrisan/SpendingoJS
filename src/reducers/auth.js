@@ -15,9 +15,10 @@ export default (state = {
   isVerifying: false,
   logginError: { isError: false, message: "", statusCode: "" },
   logoutError: { isError: false, message: "", statusCode: "" },
-  userLogged: false,
+  isAuthenticated: false,
   user: {}
 }, action) => {
+  console.log('Action Type:', action.type , 'Error:' ,(action?.error));
   switch (action.type) {
     case LOGIN_REQUEST:
       return {
@@ -30,17 +31,17 @@ export default (state = {
       return {
         ...state,
         isLoggingIn: false,
-        userLogged: true,
+        isAuthenticated: true,
         user: action.payload
       };
 
     case LOGIN_FAILURE:
       let errorLF = action.error;
+      console.log(action, '***');
       return {
         ...state,
         isLoggingIn: false,
         isAuthenticated: false,
-        userLogged: false,
         loginError: { isError: true, message: errorLF.message, statusCode: errorLF.statusCode }
       };
 
@@ -52,10 +53,11 @@ export default (state = {
       };
 
     case LOGOUT_SUCCESS:
+      console.log(state, ' on logout success');
       return {
         ...state,
         isLoggingOut: false,
-        userLogged: false,
+        isAuthenticated: false,
         user: {}
       };
 
