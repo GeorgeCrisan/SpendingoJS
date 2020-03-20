@@ -4,13 +4,8 @@ import { Redirect } from "react-router-dom";
 import { loginUser } from "../../actions";
 import { withStyles } from "@material-ui/styles";
 
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
-import Container from "@material-ui/core/Container";
+import {Typography, Paper, Container, TextField, Button, Avatar} from "@material-ui/core";
 
 
 const styles = () => ({
@@ -20,7 +15,7 @@ const styles = () => ({
     }
   },
   paper: {
-    marginTop: 100,
+    marginTop: 200,
     display: "flex",
     padding: 20,
     flexDirection: "column",
@@ -29,7 +24,11 @@ const styles = () => ({
   avatar: {
     marginLeft: "auto",
     marginRight: "auto",
-    backgroundColor: "#f50057"
+    marginBottom: 8,
+    backgroundColor: "#faa500"
+  },
+  submit: {
+    marginTop: 20
   },
   form: {
     marginTop: 1
