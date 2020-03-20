@@ -1,13 +1,17 @@
-SpendingoJS Manage Your Budgets
+ # SpendingoJS Manage Your Budgets
 
-Build with ReactJS using Hooks Redux and firebase tools
+## Built with ReactJS using Hooks Redux and google firebase tools
 
-Progress:
+Made in my spare time  georgecrisan.com  jsnstop.com @ George Crisan
 
-Connect to firebase  - done
-Prepare auth (login,logout,create) - done
-SignIn / SignUp forms and routes - done
+![Test Image 1](demo/demo1.png)
 
-To do:
-Implement email verify
-Make firebase config file available and move sensitive data to .env
+
+### Progress:
+- Connect to firebase  - done
+- Prepare auth (login,logout,create) - done
+- SignIn / SignUp forms and routes - done
+
+### To do:
+- Implement email verify
+- Make firebase config file available and move sensitive data to .env
