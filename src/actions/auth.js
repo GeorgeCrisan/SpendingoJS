@@ -13,8 +13,47 @@ export const LOGOUT_FAILURE = "LOGOUT_FAILURE";
 export const VERIFY_REQUEST = "VERIFY_REQUEST";
 export const VERIFY_SUCCESS = "VERIFY_SUCCESS";
 
+export const CREATEUSER_REQUEST = "CREATEUSER_REQUEST";
+export const CREATEUSER_SUCCESS = "CREATEUSER_SUCCESS";
+export const CREATEUSER_ERROR = "CREATEUSER_ERROR";
+
+export const UPDATE_USER = "UPDATE_USER";
+export const UPDATE_USER_ERROR = "UPDATE_USER_ERROR";
 
 //Raw Actions
+const updateUser = (user) => {
+  return {
+    type: UPDATE_USER,
+    payload: user
+  };
+};
+
+const errorUpdateUser = (err) => {
+  return {
+    type: UPDATE_USER_ERROR,
+    error: err
+  };
+};
+
+const requestCreateUser = () => {
+  return {
+    type: CREATEUSER_REQUEST
+  };
+};
+
+const successCreateUser = () => {
+  return {
+    type: CREATEUSER_SUCCESS
+  };
+};
+
+const errorCreateUser = (err) => {
+  return {
+    type: CREATEUSER_ERROR,
+    error: err
+  };
+};
+
 const requestLogin = () => {
   return {
     type: LOGIN_REQUEST
@@ -67,6 +106,32 @@ const requestCheck = () => {
 
 
 //Thunks
+
+export const createUser = (email, password, displayName) => dispatch => {
+  dispatch(requestCreateUser());
+
+  myFirebase
+    .auth()
+    .createUserWithEmailAndPassword(email, password)
+    .then((data) => {
+      const {user} = data;
+      if(user) {
+        user.updateProfile({
+          displayName: displayName
+        }).then((user)=>{
+          dispatch(updateUser(user));
+        }).catch((err2)=>{
+          dispatch(errorUpdateUser(err2));
+        });
+      }
+      dispatch(successCreateUser(user));
+    })
+    .catch((err)=>{
+      console.log('err', err);
+
+      dispatch(errorCreateUser(err));
+    });
+}
 
 export const loginUser = (email, password) => dispatch => {
   dispatch(requestLogin());

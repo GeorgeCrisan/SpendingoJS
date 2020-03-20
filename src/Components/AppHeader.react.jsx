@@ -10,17 +10,16 @@ const AppHeader = (props) => {
   let { isAuthenticated } = props;
   const { dispatch } = props;
   const logout = () => {
-    console.log(isAuthenticated);
     dispatch(logoutUser());
   };
-  console.log(isAuthenticated, 'here?? *****');
+
   return (<div className='Main Header'>
     <div style={{ display: "flex", flexFlow: ' row-nowrap', justifyContent: 'flex-end' }}>
       <div style={{ marginRight: 'auto' }}>
         <Typography component="h1" variant="h5">
           Welcome to Spendingo
         </Typography>
-        <Typography component="p" variant="p">
+        <Typography align='center' component="p" variant="subtitle1">
           Enjoy managing your spendings...
         </Typography>
       </div>

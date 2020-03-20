@@ -9,6 +9,7 @@ import ProtectedRoute from "./Components/ProtectedRoute";
 import AppHeader from "./Components/AppHeader.react";
 import Login from "./Components/RoutesScreens/Login.react";
 import UserHomeScreen from "./Components/RoutesScreens/UserHomeScreen.react";
+import Signup from "./Components/RoutesScreens/Signup.react";
 
 function App(props) {
   const { isAuthenticated, isVerifying } = props;
@@ -19,6 +20,7 @@ function App(props) {
       <Switch>
         <ProtectedRoute exact path='/userhome' component={UserHomeScreen} isAuthenticated={isAuthenticated} isVerifying={isVerifying} />
         <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
       </Switch>
     </div>
   );

@@ -6,7 +6,12 @@ import {
   LOGOUT_SUCCESS,
   LOGOUT_FAILURE,
   VERIFY_REQUEST,
-  VERIFY_SUCCESS
+  VERIFY_SUCCESS,
+  CREATEUSER_ERROR,
+  CREATEUSER_SUCCESS,
+  //REATEUSER_REQUEST,
+  //UPDATE_USER,
+  UPDATE_USER_ERROR,
 } from "../actions/";
 
 export default (state = {
@@ -15,6 +20,7 @@ export default (state = {
   isVerifying: false,
   logginError: { isError: false, message: "", statusCode: "" },
   logoutError: { isError: false, message: "", statusCode: "" },
+  createError: { isError: false, message: "", statusCode: "" },
   isAuthenticated: false,
   user: {}
 }, action) => {
@@ -37,12 +43,11 @@ export default (state = {
 
     case LOGIN_FAILURE:
       let errorLF = action.error;
-      console.log(action, '***');
       return {
         ...state,
         isLoggingIn: false,
         isAuthenticated: false,
-        loginError: { isError: true, message: errorLF.message, statusCode: errorLF.statusCode }
+        loginError: { isError: true, message: errorLF.message, statusCode: errorLF.code }
       };
 
     case LOGOUT_REQUEST:
@@ -53,7 +58,6 @@ export default (state = {
       };
 
     case LOGOUT_SUCCESS:
-      console.log(state, ' on logout success');
       return {
         ...state,
         isLoggingOut: false,
@@ -66,7 +70,7 @@ export default (state = {
         return {
           ...state,
           isLoggingOut: false,
-          logoutError: { isError: true, message: errorLGOF.message, statusCode: errorLGOF.statusCode }
+          logoutError: { isError: true, message: errorLGOF.message, statusCode: errorLGOF.code }
         };
 
 
@@ -81,6 +85,27 @@ export default (state = {
       return {
         ...state,
         isVerifying: false
+      };
+
+    case CREATEUSER_SUCCESS:
+      return {
+        ...state,
+        user: action.payload,
+        createError: { isError: false, message: '', statusCode: '' }
+      }
+
+      case UPDATE_USER_ERROR:
+        let errorUD = action.error;
+        return {
+          ...state,
+          updateError: { isError: true, message: errorUD.message, statusCode: errorUD.code }
+        }
+
+    case CREATEUSER_ERROR:
+      let errorCU = action.error;
+      return {
+        ...state,
+        createError: { isError: true, message: errorCU.message, statusCode: errorCU.code }
       };
 
     default:
