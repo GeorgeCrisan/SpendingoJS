@@ -127,8 +127,6 @@ export const createUser = (email, password, displayName) => dispatch => {
       dispatch(successCreateUser(user));
     })
     .catch((err)=>{
-      console.log('err', err);
-
       dispatch(errorCreateUser(err));
     });
 }

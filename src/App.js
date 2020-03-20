@@ -12,7 +12,7 @@ import UserHomeScreen from "./Components/RoutesScreens/UserHomeScreen.react";
 import Signup from "./Components/RoutesScreens/Signup.react";
 
 function App(props) {
-  const { isAuthenticated, isVerifying } = props;
+  const { isAuthenticated, isVerifying , user} = props;
 
   return (
     <div className="rootApp" style={{maxWidth: 1000, padding: "0px 16px", margin: '16px auto auto'}}>
@@ -29,7 +29,8 @@ function App(props) {
 function mapStateToProps(state) {
   return {
     isAuthenticated: state.auth.isAuthenticated,
-    isVerifying: state.auth.isVerifying
+    isVerifying: state.auth.isVerifying,
+    user: state.auth.user
   };
 }
 
