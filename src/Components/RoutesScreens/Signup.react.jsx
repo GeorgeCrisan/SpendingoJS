@@ -44,6 +44,7 @@ const Signup = (props) => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
+  const [dnerror, setDnerror] = useState(false);
 
 
   const handleChange = ({target}, type) => {
@@ -65,6 +66,11 @@ const Signup = (props) => {
   }
 
   const handleSubmit = () => {
+    if (!name || name.length < 4) {
+      setDnerror(true);
+      return;
+    }
+    setDnerror(false);
     const { dispatch } = props;
     console.log(email, password, name);
     dispatch(createUser( email, password, name));
@@ -118,6 +124,11 @@ const Signup = (props) => {
       {createError?.isError && (
         <Typography component="p" className={classes.errorText}>
         {`${createError?.message ? createError.message : 'Error'}`}
+      </Typography>
+      )}
+      {dnerror && (
+        <Typography component="p" className={classes.errorText}>
+        Please set display name. Minimum characters 4.
       </Typography>
       )}
       <Button
