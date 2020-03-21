@@ -2,7 +2,29 @@
 
 .reset__password__wrapper {
   display: flex;
+  flex-flow: column;
   justify-content: space-between;
+  button {
+    margin: 0px 16px 16px;
+    @include for-tablet-landscape-up {
+      margin-top: 16px;
+      max-height: 50px;
+      align-self: center;
+    }
+  }
+
+  div {
+    width: 100%;
+    margin-bottom: 12px;
+    @include for-tablet-landscape-up {
+      width: 80%;
+      
+    }
+  }
+  
+  @include for-tablet-landscape-up {
+    flex-flow: row nowrap;
+  }
 }
 
 .rootApp {

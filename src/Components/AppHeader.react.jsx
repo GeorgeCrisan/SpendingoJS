@@ -17,12 +17,14 @@ const AppHeader = (props) => {
   return (<div className='main__header__wrapper'>
     <div className='main__header__inner' >
       <div className='main__header__typo'>
+        <Link style={{textDecoration: 'none'}} to='/'>
         <Typography component="h1" variant="h5">
           Welcome to Spendingo
         </Typography>
         <Typography align='center' component="p" variant="subtitle1">
           The Joy of managing any budget
         </Typography>
+        </Link>
       </div>
       <div className='main__header__buttons'>
       {isAuthenticated && <ButtonSpendingo onClick={logout}>{'Logout'}</ButtonSpendingo>}

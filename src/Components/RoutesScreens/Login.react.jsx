@@ -62,7 +62,7 @@ const Login = (props) => {
   const [password, setPassword] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [emailNotValid, setEmailNotValid] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(true);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleEmailChange = ({ target }) => {
     setEmail(target.value);
@@ -157,7 +157,7 @@ const Login = (props) => {
           </div>}
           
           {!showSuccess && <div className='reset__password__wrapper'>
-            <Typography component="p" style={{ paddingTop: 16 }} >
+            <Typography component="p" style={{ paddingTop: 16, marginRight: 16, marginTop: 8 }} >
               <MailOutlineIcon style={{ position: 'relative', top: 5, color: '#4BB543' }} /> Please use a valid email address to reset your password.
         </Typography>
             <TextField
@@ -166,13 +166,13 @@ const Login = (props) => {
               id="email"
               error={emailNotValid}
               helperText={emailNotValid ? 'Email format is not valid' : ''}
-              style={{ width: '70%', marginRight: 16 }}
+              style={{marginTop: 26 }}
               label="Email address"
               name="email"
               onChange={(evt) => { setResetEmail(evt.target.value) }}
             />
-            <Button variant="outlined" size='large' style={{ margin: '22px 16px 16px 0px' }} onClick={() => { setShowModal(false); }} > Cancel </Button>
-            <Button variant="outlined" size='large' style={{ margin: '22px 16px 16px 0px' }} color="primary" onClick={() => submitReset()} > Submit </Button>
+            <Button variant="outlined" size='large'  onClick={() => { setShowModal(false); }} > Cancel </Button>
+            <Button variant="outlined" size='large'  color="primary" onClick={() => submitReset()} > Submit </Button>
           </div>}
         </Container>
       </Drawer>
