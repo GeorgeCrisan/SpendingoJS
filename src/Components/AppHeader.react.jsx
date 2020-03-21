@@ -13,8 +13,8 @@ const AppHeader = (props) => {
     dispatch(logoutUser());
   };
 
-  return (<div className='Main Header'>
-    <div style={{ display: "flex", flexFlow: ' row-nowrap', justifyContent: 'flex-end' }}>
+  return (<div className='main__header__wrapper'>
+    <div className='main__header__inner' style={{ display: "flex", flexFlow: ' row-nowrap', justifyContent: 'flex-end' }}>
       <div style={{ marginRight: 'auto' }}>
         <Typography component="h1" variant="h5">
           Welcome to Spendingo
@@ -23,9 +23,11 @@ const AppHeader = (props) => {
           Enjoy managing your spendings...
         </Typography>
       </div>
+      <div className='main__header__buttons'>
       {isAuthenticated && <ButtonSpendingo onClick={logout}>{'Logout'}</ButtonSpendingo>}
       {!isAuthenticated && <Link style={{ textDecoration: 'none', marginRight: 16 }} to={'/login'}><ButtonSpendingo>{'Login'}</ButtonSpendingo></Link>}
       {!isAuthenticated && <Link style={{ textDecoration: 'none' }} to={'/signup'}><ButtonSpendingo>{'Sign Up'}</ButtonSpendingo></Link>}
+      </div>
     </div>
   </div>);
 };

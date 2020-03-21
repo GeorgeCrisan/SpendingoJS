@@ -20,6 +20,10 @@ export const CREATEUSER_ERROR = "CREATEUSER_ERROR";
 export const UPDATE_USER = "UPDATE_USER";
 export const UPDATE_USER_ERROR = "UPDATE_USER_ERROR";
 
+export const REQUEST_PASS_SUCCESS = 'REQUEST_PASS_SUCCESS';
+export const REQUEST_PASS_FAIL = 'REQUEST_PASS_FAIL';
+export const REQUEST_PASS_START = 'REQUEST_PASS_START';
+
 //Raw Actions
 const updateUser = (user) => {
   return {
@@ -104,8 +108,40 @@ const requestCheck = () => {
   };
 };
 
+const passRequestStart = () => {
+  return {
+    type: REQUEST_PASS_START,
+  };
+};
+
+const passRequestSuccess = () => {
+  return {
+    type: REQUEST_PASS_SUCCESS,
+  };
+};
+
+const passRequestFail = (err) => {
+  return {
+    type: REQUEST_PASS_FAIL,
+    error: err
+  };
+};
 
 //Thunks
+export const passwordReset = (email) => dispatch => {
+  console.log('email', email);
+  dispatch(passRequestStart());
+  myFirebase
+  .auth()
+  .sendPasswordResetEmail(email)
+  .then((data)=>{
+    console.log(data);
+    dispatch(passRequestSuccess(data));
+  })
+  .catch((err)=>{
+    dispatch(passRequestFail(err));
+  });
+};
 
 export const createUser = (email, password, displayName) => dispatch => {
   dispatch(requestCreateUser());
@@ -116,6 +152,9 @@ export const createUser = (email, password, displayName) => dispatch => {
     .then((data) => {
       const {user} = data;
       if(user) {
+
+        user.sendEmailVerification();
+
         user.updateProfile({
           displayName: displayName
         }).then((user)=>{
