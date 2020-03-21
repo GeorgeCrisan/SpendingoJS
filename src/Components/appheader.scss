@@ -13,6 +13,10 @@
   .main__header__typo {
     margin-right: auto;
   }
+  .main__header__typo p, .main__header__typo h1 {
+    color: #fff;  
+  }
+
   @include for-phone-only {
     .main__header__buttons {
       display: flex;

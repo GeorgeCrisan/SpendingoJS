@@ -1,0 +1,55 @@
+@import '../mixins';
+
+.ipage__content {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  display: flex;
+  width: 100%;
+  @include for-tablet-landscape-up {
+    flex-flow: row nowrap;
+  }
+  justify-content: space-evenly;
+  flex-flow: column nowrap;
+  .ipage__container {
+    width: 330px;
+    @include for-tablet-portrait-up {
+      width: 400px;
+    }
+  }
+}
+
+.ipage__sassytext {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  flex-flow: column nowrap;
+  
+  @include for-tablet-landscape-up {
+    flex-flow: row nowrap;
+  }
+  margin-top: 0px;
+    @include for-tablet-landscape-up {
+      margin-top: 120px;
+    }
+  .paper__text__item {
+      p {
+        font-size: 20px;
+        color: #fff;
+        font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+        text-align: center;
+        svg {
+          font-size: 30px;
+          position: relative;
+          margin-right: 10px;
+          top: 8px;
+          @include for-tablet-portrait-up { 
+            font-size: 60px;
+            top: 16px;
+          }
+        }
+        @include for-tablet-portrait-up {
+          font-size: 28px;
+          text-align: left;
+        }
+      }
+  }
+}
