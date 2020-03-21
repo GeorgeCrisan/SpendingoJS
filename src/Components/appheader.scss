@@ -1,0 +1,34 @@
+@import './mixins';
+
+.main__header__inner {
+  display: flex;
+  flex-flow: column;
+@include for-tablet-portrait-up {
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  }
+}
+
+.main__header__inner {
+  .main__header__typo {
+    margin-right: auto;
+  }
+  @include for-phone-only {
+    .main__header__buttons {
+      display: flex;
+      justify-content: space-evenly;
+      order: -1;
+      margin-bottom: 20px;
+    }
+    .main__header__typo {
+      margin-right: unset;
+    }
+    .main__header__typo p, .main__header__typo h1 {
+      text-align: center;
+      margin: auto; 
+    }
+    div p {
+      padding-bottom: 16px;
+    }
+  }
+}

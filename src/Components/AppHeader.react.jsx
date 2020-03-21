@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logoutUser } from '../actions';
 import {Typography} from "@material-ui/core";
+import './appheader.scss';
 
 const AppHeader = (props) => {
   let { isAuthenticated } = props;
@@ -14,13 +15,13 @@ const AppHeader = (props) => {
   };
 
   return (<div className='main__header__wrapper'>
-    <div className='main__header__inner' style={{ display: "flex", flexFlow: ' row-nowrap', justifyContent: 'flex-end' }}>
-      <div style={{ marginRight: 'auto' }}>
+    <div className='main__header__inner' >
+      <div className='main__header__typo'>
         <Typography component="h1" variant="h5">
           Welcome to Spendingo
         </Typography>
         <Typography align='center' component="p" variant="subtitle1">
-          Enjoy managing your spendings...
+          The Joy of managing any budget
         </Typography>
       </div>
       <div className='main__header__buttons'>

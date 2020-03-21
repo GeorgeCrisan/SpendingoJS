@@ -10,6 +10,9 @@ import ErrorIcon from '@material-ui/icons/Error';
 import { Typography, Paper, Container, TextField, Button, Avatar } from "@material-ui/core";
 import Drawer from '@material-ui/core/Drawer';
 
+//Style
+import login from './login.scss';
+
 function validateEmail(email) {
   var re = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
   return re.test(email);
@@ -60,7 +63,7 @@ const Login = (props) => {
   const [password, setPassword] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [emailNotValid, setEmailNotValid] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(true);
 
   const handleEmailChange = ({ target }) => {
     setEmail(target.value);
@@ -124,7 +127,7 @@ const Login = (props) => {
       />
       {loginError && (
         <Typography component="p" className={classes.errorText}>
-          <ErrorIcon style={{position: 'relative', top: 7}} /> Incorrect email or password.
+          <ErrorIcon style={{ position: 'relative', top: 7 }} /> Incorrect email or password.
         </Typography>
       )}
 
@@ -143,16 +146,20 @@ const Login = (props) => {
       >
         Sign In
     </Button>
-    {console.log(showModal)}
+      {console.log(showModal)}
       <Drawer anchor={'top'} open={Boolean(showModal)} onClose={() => setShowModal('false')}>
 
         <Container component="main" maxWidth="md">
-          {showSuccess && <Typography component="h4" style={{ padding: '16px 16px 16px 0', color: '#4BB543' }} >
-          <MailOutlineIcon style={{position: 'relative', top: 5, color: '#4BB543'}} />Password reset request sent. Please check your email inbox.Thank you!
-        </Typography>}
+          {showSuccess && <div className='reset__password__wrapper'>
+            <Typography component="h4" style={{ padding: '16px 16px 16px 0', color: '#4BB543' }} >
+              <MailOutlineIcon style={{ position: 'relative', marginRight: 16, top: 5, color: '#4BB543' }} />Password reset request sent. Please check your email inbox.Thank you!
+            </Typography>
+            <Button variant="outlined" size='small' style={{ margin: 16, height: 40 }} onClick={() => { setShowModal(false); }} > Done </Button>
+          </div>}
+          
           {!showSuccess && <div className='reset__password__wrapper'>
             <Typography component="p" style={{ paddingTop: 16 }} >
-            <MailOutlineIcon style={{position: 'relative', top: 5, color: '#4BB543'}} /> Please use a valid email address to reset your password.
+              <MailOutlineIcon style={{ position: 'relative', top: 5, color: '#4BB543' }} /> Please use a valid email address to reset your password.
         </Typography>
             <TextField
               variant="outlined"
