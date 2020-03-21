@@ -1,6 +1,15 @@
+@import '../mixins';
 
 .reset__password__wrapper {
   display: flex;
   justify-content: space-between;
 }
 
+.rootApp {
+  .MuiPaper-rounded {
+    margin-top: 40px;
+    @include for-tablet-landscape-up {
+      margin-top: 100px;
+    }
+  }
+}

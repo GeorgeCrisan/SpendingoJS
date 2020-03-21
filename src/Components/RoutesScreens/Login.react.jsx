@@ -31,7 +31,6 @@ const styles = () => ({
   },
 
   paper: {
-    marginTop: 100,
     display: "flex",
     padding: 20,
     flexDirection: "column",
