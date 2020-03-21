@@ -11,7 +11,7 @@ import { Typography, Paper, Container, TextField, Button, Avatar } from "@materi
 import Drawer from '@material-ui/core/Drawer';
 
 //Style
-import login from './login.scss';
+import './login.scss';
 
 function validateEmail(email) {
   var re = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);

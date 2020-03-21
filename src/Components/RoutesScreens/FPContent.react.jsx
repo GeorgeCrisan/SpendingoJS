@@ -11,10 +11,6 @@ import DoneAllIcon from '@material-ui/icons/DoneAll';
 
 import './fpcontent.scss';
 
-const iconStyle = {
-  
-};
-
 const useStyles = makeStyles(theme => ({
   root: {
     height: 32,

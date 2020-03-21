@@ -15,7 +15,7 @@ import CookieConsent from "react-cookie-consent";
 import './app.scss';
 
 function App(props) {
-  const { isAuthenticated, isVerifying , user} = props;
+  const { isAuthenticated, isVerifying  /*,user*/} = props;
 
   return (
     <div className="rootApp" style={{maxWidth: 1000, padding: "0px 16px", margin: '16px auto auto'}}>
