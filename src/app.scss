@@ -2,3 +2,29 @@ body {
   background: rgb(36,36,120);
   background: linear-gradient(90deg, rgba(36,36,120,1) 13%, rgba(27,155,181,1) 100%);
 }
+
+.footer {
+  margin: auto auto;
+  display: flex;
+  align-items: center;
+  
+  justify-content: center;
+  height: 60px;
+  clear: both;
+  position: relative;
+  height: 60px;
+  margin-top: -60px;
+  bottom: 0;
+  p {
+    align-self: center;
+    text-align: center;
+    width: 100%;
+    color: #fff;
+    flex: 1;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    svg {
+      position: relative;
+      top: 8px;
+    }
+  }
+}

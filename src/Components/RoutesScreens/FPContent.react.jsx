@@ -13,7 +13,7 @@ import './fpcontent.scss';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    height: 32,
+    marginBottom: 100
   },
   container: {
     width: "100%",
@@ -101,5 +101,6 @@ export default function FPContent() {
         </Grow>
       </div>
     </div>
+
   </>);
 }

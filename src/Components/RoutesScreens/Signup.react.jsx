@@ -9,11 +9,6 @@ import {Typography, Paper, Container, TextField, Button, Avatar} from "@material
 
 
 const styles = () => ({
-  "@global": {
-    body: {
-      backgroundColor: "#fff"
-    }
-  },
   paper: {
     display: "flex",
     padding: 20,
@@ -80,7 +75,7 @@ const Signup = (props) => {
     return <Redirect to="/userhome" />;
   }
 
-  return (<Container component="main" maxWidth="xs">
+  return (<Container component="main" style={{marginBottom: 100}} maxWidth="xs">
     <Paper className={classes.paper}>
       <Avatar className={classes.avatar}>
         <AccountCircleOutlinedIcon />

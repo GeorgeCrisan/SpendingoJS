@@ -1,21 +1,24 @@
 import React, {useEffect} from 'react';
 import {fetchBudgets} from '../../actions';
+import './userdashboard.scss';
 import {connect} from 'react-redux';
 
-const UserDashBoard = (props) => {
+const UserDashboard = (props) => {
   
   useEffect(()=>{
     const { dispatch } = props;
-    console.log(props, 'here');
-    let budgets = dispatch(fetchBudgets());
-    console.log(budgets);
+    dispatch(fetchBudgets());
+    console.log(props);
   },[]);
-
-  return (<div> Temp div </div>);
+  console.log(props);
+  return (<div className='dashboard__wrapper' > Temp div </div>);
 };
 
-const mapStateToProps = () => {
-  return {};
+const mapStateToProps = (state) => {
+  return { 
+    budgets: state.budgets.budgets,
+    error: state.budgets.error
+  };
 };
 
-export default connect(mapStateToProps)(UserDashBoard);
+export default connect(mapStateToProps)(UserDashboard);
