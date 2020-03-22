@@ -78,7 +78,6 @@ const Login = (props) => {
   }
 
   const submitReset = () => {
-    console.log('submited');
     const { dispatch } = props;
     if (validateEmail(resetEmail)) {
       dispatch(passwordReset(resetEmail));

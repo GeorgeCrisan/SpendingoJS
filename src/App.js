@@ -8,7 +8,7 @@ import ProtectedRoute from "./Components/ProtectedRoute";
 // Presentational Components
 import AppHeader from "./Components/AppHeader.react";
 import Login from "./Components/RoutesScreens/Login.react";
-import UserHomeScreen from "./Components/RoutesScreens/UserHomeScreen.react";
+import UserDashBoard from "./Components/RoutesScreens/UserDashBoard.react";
 import FPContent from "./Components/RoutesScreens/FPContent.react";
 import Signup from "./Components/RoutesScreens/Signup.react";
 import CookieConsent from "react-cookie-consent";
@@ -21,7 +21,7 @@ function App(props) {
     <div className="rootApp" style={{maxWidth: 1000, padding: "0px 16px", margin: '16px auto auto'}}>
       <AppHeader isAuthenticated={isAuthenticated} isVerifying={isVerifying}/>
       <Switch>
-        <ProtectedRoute exact path='/userhome' component={UserHomeScreen} isAuthenticated={isAuthenticated} isVerifying={isVerifying} />
+        <ProtectedRoute exact path='/userhome' component={UserDashBoard} isAuthenticated={isAuthenticated} isVerifying={isVerifying} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/" component={FPContent } />

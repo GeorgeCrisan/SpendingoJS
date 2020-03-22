@@ -152,7 +152,6 @@ export const createUser = (email, password, displayName) => dispatch => {
     .then((data) => {
       const {user} = data;
       if(user) {
-
         user.sendEmailVerification();
 
         user.updateProfile({
@@ -177,6 +176,7 @@ export const loginUser = (email, password) => dispatch => {
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then((user) => {
+      console.log(user, 'logged');
       dispatch(successLogin(user));
     })
     .catch(err => {
