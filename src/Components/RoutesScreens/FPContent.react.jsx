@@ -75,10 +75,10 @@ export default function FPContent() {
         <Grow in={checked}>
           <Paper elevation={4} className={classes.paper}>
             <Container className={`${classes.nestedcontainer} ipage__container`} maxWidth="md">
-              <h2> What can Spendingo do? </h2>
-              <p><DoneAllIcon /> Spendingo is an application useful for managing budgets.</p>
+              <h2> What can Spendingojs do? </h2>
+              <p><DoneAllIcon /> Spendingojs is an application useful for managing budgets.</p>
               <p><DoneAllIcon /> Allows you to plan and have control over your spendings.</p>
-              <p><DoneAllIcon /> Create a budget and manage entries. Spendingo calculates everything for you.</p>
+              <p><DoneAllIcon /> Create a budget and manage entries. Spendingojs calculates everything for you.</p>
               <p><DoneAllIcon /> You can see a history of your spendings itemized and more. </p>
             </Container>
           </Paper>
@@ -94,7 +94,7 @@ export default function FPContent() {
               <h2> Motivation. </h2>
               <p><DoneAllIcon /> If you have the habit to allocate certain amount of money towards different plans, this is perfect for you.</p>
               <p><DoneAllIcon /> Plan your holiday budget, plan your wedding budget and spendings, plan an event. </p>
-              <p><DoneAllIcon /> Spendingo aims to help you organsie yourself easily. Now on mobile, tablet or desktop.</p>
+              <p><DoneAllIcon /> Spendingojs aims to help you organsie yourself easily. Now on mobile, tablet or desktop.</p>
               <p><DoneAllIcon /> Now on mobile, tablet or desktop. Soon in app store.</p>
             </Container>
           </Paper>

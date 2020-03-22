@@ -34,7 +34,7 @@ function App(props) {
     buttonStyle={{ background: '#fff', fontSize: "14px" }}
     expires={150}
 >
-    This website uses cookies to enhance the user experience and advertizing. While spendingo is free, a source of income is necessary. If you do not agree please leave the site.
+    This website uses cookies to enhance the user experience and advertizing. While spendingojs is free, a source of income is necessary. If you do not agree please leave the site.
 
 </CookieConsent>
     </div>

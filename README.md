@@ -13,5 +13,5 @@ Made in my spare time  georgecrisan.com  jsnstop.com @ George Crisan
 - SignIn / SignUp forms and routes - done
 
 ### To do:
-- Implement email verify
+- Implement email verify - done
 - Make firebase config file available and move sensitive data to .env

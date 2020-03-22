@@ -15,7 +15,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ButtonSpendingo(props) {
+export default function ButtonSpendingojs(props) {
   const classes = useStyles();
 return <Button onClick={props.onClick} className={classes.root}>{props.children}</Button>;
 }
