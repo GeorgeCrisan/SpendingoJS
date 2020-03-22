@@ -28,7 +28,7 @@ const AppHeader = (props) => {
       </div>
       <div className='main__header__buttons'>
       {isAuthenticated && <ButtonSpendingojs onClick={logout}>{'Logout'}</ButtonSpendingojs>}
-      {!isAuthenticated && <Link style={{ textDecoration: 'none', marginRight: 16 }} to={'/login'}><Buttonjs>{'Login'}</ButtonSpendingojs></Link>}
+      {!isAuthenticated && <Link style={{ textDecoration: 'none', marginRight: 16 }} to={'/login'}><ButtonSpendingojs>{'Login'}</ButtonSpendingojs></Link>}
       {!isAuthenticated && <Link style={{ textDecoration: 'none' }} to={'/signup'}><ButtonSpendingojs>{'Sign Up'}</ButtonSpendingojs></Link>}
       </div>
     </div>
