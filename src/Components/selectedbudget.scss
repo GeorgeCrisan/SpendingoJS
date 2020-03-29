@@ -5,16 +5,11 @@
 .current__budget__wrapper {
   color: #fff;
   width: 100%;
-  margin: auto;
   h2 {
     text-align: center;
   }
   @include for-tablet-portrait-up {
     width: 45%;
-  }
-
-  h2 {
-    padding-top: 16px;
   }
 
   .MuiPaper-rounded {
@@ -25,8 +20,17 @@
   }
 }
 
+
 .budgetlist__wrapper {
-  margin-top: 32px;
+  margin-top: 20px;
+}
+
+.current__budget__wrapper {
+  margin-top: 20px;
+}
+
+.current__budget__wrapper h2 {
+  padding-top: 16px;
 }
 
 .current__budget__content {
@@ -47,11 +51,34 @@
 .current__budget__button__wrapper {
   display: flex;
   justify-content: center;
-  
-  .current__budget__button {
-    margin: 16px;
-    .MuiButton-label {
-      color: #2196F3 !important;
-    }
+}
+
+.current__budget__button {
+  margin-top: 16px !important;
+  border: 1px solid #2196F3 !important;
+  .MuiButton-label {
+    color: #2196F3;
   }
+
+  &--expanded {
+    width: 100%;
+    margin-top: 16px !important;
+    border: 2px solid #fff !important;
+
+    .MuiButton-label {
+      color: #fff;
+    }
+    
+    background: white;
+  }
+
+  &--expanded.success {
+    border: 2px solid #4BB543 !important;
+  }
+}
+
+.budgetlist__container {
+  height: 366px;
+  border: 2px solid #fff;
+  border-radius: 5px;
 }

@@ -19,28 +19,29 @@ const UserDashboard = (props) => {
 
   useEffect(()=>{
     const { dispatch } = props;
-    if(props.budgets.length === 0) {
       dispatch(fetchBudgets());
-    }
-    if(props.budgets && props.budgets.length > 0 ) {
-      setSelectedState({userSelected: false, selectedBudget: props.budgets[0]});
-    }
-  },[props.budgets]);
+  },[]);
+
+  useEffect(()=>{
+    console.log('props have changes', props);
+  },[props.budgets, props.loading]);
 
   return (<div className='dashboard__wrapper' >
       <h1 style={{color: '#fff'}}> <DashboardIcon style={{fontSize: 36, color: '#f25e7f', position: 'relative', top: 5}} /> Dashboard.  </h1>
       <p style={{color: '#fff'}}>  Inspect, Create, Amend, Delete your budgets. </p>
-      <div style={{border:'1px solid #fff', width: '100%', textAlign: 'center', height: 50}}> Some of my comercials banners </div>
+      <div style={{ width: '100%', textAlign: 'center', height: 50, marginTop: 60, marginBottom: 30 }}> Some of my comercials banners </div>
       <div className='dashboard__content'>
-        <SelectedBudget selectedBudget={slectedState}/>
+        <SelectedBudget loading={props.loading} budgets={props.budgets}  selectedBudget={slectedState} setSelectedBudget={setSelectedState}/>
         <BudgetsList budgets={props.budgets} />
       </div>
+      <div style={{ width: '100%', textAlign: 'center', height: 50, marginTop: 60}}> Some of my comercials banners </div>
      </div>);
 };
 
 const mapStateToProps = (state) => {
   return { 
     budgets: state.budgets.budgets,
+    loading: state.budgets.loading,
     error: state.budgets.error
   };
 };

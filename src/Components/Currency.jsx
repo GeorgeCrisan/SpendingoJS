@@ -9,6 +9,6 @@ export default function Currency(props) {
     uk: '£'
   };
 
-return (<span>{currency[props.currency]}</span>);
+return (<span style={{marginLeft: 2}} >{currency[props.currency]}</span>);
 
 }
