@@ -144,7 +144,6 @@ const Login = (props) => {
       >
         Sign In
     </Button>
-      {console.log(showModal)}
       <Drawer anchor={'top'} open={Boolean(showModal)} onClose={() => setShowModal('false')}>
 
         <Container component="main" maxWidth="md">

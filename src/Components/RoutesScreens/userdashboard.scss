@@ -1,4 +1,13 @@
+@import '../mixins';
+
 .dashboard__wrapper {
   margin-bottom: 60px;
-  padding: 16px;
+  //padding: 16px;
+}
+
+.dashboard__content {
+  @include for-tablet-portrait-up { 
+    display: flex;
+    justify-content: space-around;
+  }
 }

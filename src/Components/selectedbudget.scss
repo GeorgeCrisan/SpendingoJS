@@ -1,3 +1,57 @@
+@import './mixins';
+
+
+.budgetlist__wrapper,
 .current__budget__wrapper {
   color: #fff;
+  width: 100%;
+  margin: auto;
+  h2 {
+    text-align: center;
+  }
+  @include for-tablet-portrait-up {
+    width: 45%;
+  }
+
+  h2 {
+    padding-top: 16px;
+  }
+
+  .MuiPaper-rounded {
+    margin-top: 0px;
+    @include for-tablet-landscape-up {
+      margin-top: 0px;
+    }
+  }
+}
+
+.budgetlist__wrapper {
+  margin-top: 32px;
+}
+
+.current__budget__content {
+  padding-bottom: 16px;
+  p {
+    color: #2196F3;
+  }
+  span {
+    color: #f25e7f;
+    margin-left: 8px;
+  }
+  h2 {
+    line-height: 1.4;
+    border-bottom: 2px  solid #f25e7f ;
+  }
+}
+
+.current__budget__button__wrapper {
+  display: flex;
+  justify-content: center;
+  
+  .current__budget__button {
+    margin: 16px;
+    .MuiButton-label {
+      color: #2196F3 !important;
+    }
+  }
 }

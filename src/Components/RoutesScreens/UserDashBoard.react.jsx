@@ -3,6 +3,8 @@ import {fetchBudgets} from '../../actions';
 import './userdashboard.scss';
 import {connect} from 'react-redux';
 
+import DashboardIcon from '@material-ui/icons/Dashboard';
+
 //Components
 
 import SelectedBudget from '../SelectedBudget.react';
@@ -17,7 +19,7 @@ const UserDashboard = (props) => {
 
   useEffect(()=>{
     const { dispatch } = props;
-    if(props.budgets.length == 0) {
+    if(props.budgets.length === 0) {
       dispatch(fetchBudgets());
     }
     if(props.budgets && props.budgets.length > 0 ) {
@@ -26,10 +28,13 @@ const UserDashboard = (props) => {
   },[props.budgets]);
 
   return (<div className='dashboard__wrapper' >
-      <h1>Temp div </h1>
-      <p> Short description </p>
-      <SelectedBudget selectedBudget={slectedState}/>
-      <BudgetsList budgets={props.budgets} />
+      <h1 style={{color: '#fff'}}> <DashboardIcon style={{fontSize: 36, color: '#f25e7f', position: 'relative', top: 5}} /> Dashboard.  </h1>
+      <p style={{color: '#fff'}}>  Inspect, Create, Amend, Delete your budgets. </p>
+      <div style={{border:'1px solid #fff', width: '100%', textAlign: 'center', height: 50}}> Some of my comercials banners </div>
+      <div className='dashboard__content'>
+        <SelectedBudget selectedBudget={slectedState}/>
+        <BudgetsList budgets={props.budgets} />
+      </div>
      </div>);
 };
 
