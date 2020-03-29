@@ -5,20 +5,31 @@ import {connect} from 'react-redux';
 
 //Components
 
-import BudgetsPanel from '../BudgetsPanel.react';
+import SelectedBudget from '../SelectedBudget.react';
+import BudgetsList from '../BudgetsList.react';
 
 const UserDashboard = (props) => {
   
+  let [slectedState, setSelectedState] = React.useState({
+    userSelected: false,
+    selectedBudget: false
+  });
+
   useEffect(()=>{
     const { dispatch } = props;
-    dispatch(fetchBudgets());
-    console.log(props);
-  },[]);
-  console.log(props);
+    if(props.budgets.length == 0) {
+      dispatch(fetchBudgets());
+    }
+    if(props.budgets && props.budgets.length > 0 ) {
+      setSelectedState({userSelected: false, selectedBudget: props.budgets[0]});
+    }
+  },[props.budgets]);
+
   return (<div className='dashboard__wrapper' >
       <h1>Temp div </h1>
       <p> Short description </p>
-      <BudgetsPanel />
+      <SelectedBudget selectedBudget={slectedState}/>
+      <BudgetsList budgets={props.budgets} />
      </div>);
 };
 

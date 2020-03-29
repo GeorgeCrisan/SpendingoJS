@@ -28,9 +28,12 @@ const lberror = (err) => {
 
 export const fetchBudgets = () => dispatch => {
   dispatch(lbstart());
+  console.log(myFirebase.auth().currentUser.uid);
   myFirebase.firestore().collection('budgets')
-    .where('uid', "==", myFirebase.auth().currentUser.uid)
+    .where('ownerid', "==", myFirebase.auth().currentUser.uid)
+    .orderBy('createddate', 'desc')
     .get().then((data) => {
+      
       let dataParsed = [];
       data = data.forEach((el) => {
         dataParsed.push(el.data());

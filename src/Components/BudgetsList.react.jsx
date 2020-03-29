@@ -3,9 +3,7 @@ import React from 'react';
 
 
 
-export default function BudgetsPanel() {
-
-
+export default function BudgetsList(props) {
 
   return (
     <div>
