@@ -91,3 +91,24 @@
   border-radius: 5px;
   overflow: scroll;
 }
+
+.add__budget__fieldswrapper {
+  display: block;
+  @include for-tablet-landscape-up {
+    display: flex;
+    justify-content: space-evenly;
+    flex-flow: row nowrap;
+    .add__budget__number,
+    .add__budget__select {
+      width: 45%;
+    }
+  }
+  
+ .add__budget__select {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    @include for-tablet-portrait-up {
+      margin-right: 16px;
+    }
+  }
+}

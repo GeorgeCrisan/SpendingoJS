@@ -53,8 +53,8 @@ export default function SelectedBudget(props) {
                 </div>
               </div>}
               {!sb && <div style={{ height: 450, display: 'flex', flexFlow: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                <h2 style={{ paddingTop: 16, borderBottom: 'none', color: '#2196F3' }}> <NotesIcon style={{ fontSize: 40, position: 'relative', top: 10 }} />
-                  Please create a budget. Soon a sbudget is created, relevant data is displayed here.
+                <h2 style={{ paddingTop: 16, borderBottom: 'none', color: '#2196F3' }}> <NotesIcon style={{ fontSize: 40, position: 'relative', top: 12, right: 4 }} />
+                  Please create a budget. Soon as budget is created, relevant data is displayed here.
                 </h2>
               </div>}
             </Container>
