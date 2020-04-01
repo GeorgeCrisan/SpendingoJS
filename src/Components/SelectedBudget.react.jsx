@@ -35,7 +35,7 @@ export default function SelectedBudget(props) {
         <Grow in={checked}>
           <Paper elevation={4} style={{overflow: 'scroll', height: 483, display: 'flex'}} >
             <Container className={`current__budget__content`} style={{display: 'flex'}} maxWidth="md">
-              {sb && <div>
+              {sb && <div style={{width: '100%'}}>
                 <h2 style={{color: '#2196f3',marginTop: 0 }}>
                    <CalendarViewDayOutlinedIcon style={{marginRight: 8, color: '#2196f3', position: 'relative', top: 4}} />
                    {!props.selectedBudget.userSelected ? 'Latest Budget' : 'Selected Budget'}
