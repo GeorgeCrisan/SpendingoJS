@@ -27,11 +27,12 @@
 
 .current__budget__wrapper {
   margin-top: 20px;
+
+  h2 {
+    padding-top: 16px;
+  }
 }
 
-.current__budget__wrapper h2 {
-  padding-top: 16px;
-}
 
 .current__budget__content {
   padding-bottom: 16px;
@@ -86,7 +87,7 @@
 }
 
 .budgetlist__container {
-  height: 462px;
+  height: 480px;
   border: 2px solid #fff;
   border-radius: 5px;
   overflow: scroll;
@@ -110,5 +111,18 @@
     @include for-tablet-portrait-up {
       margin-right: 16px;
     }
+  }
+}
+
+.show__mobile__only {
+  display: none;
+  @include for-phone-only {
+    display: block;
+  }
+}
+.show__desktop__only {
+  display: none;
+  @include for-tablet-portrait-up {
+    display: block;
   }
 }

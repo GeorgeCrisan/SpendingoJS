@@ -36,7 +36,7 @@ const UserDashboard = (props) => {
   return (<div className='dashboard__wrapper' >
       <h1 style={{color: '#fff'}}> <DashboardIcon style={{fontSize: 36, color: '#f25e7f', position: 'relative', top: 5}} /> Dashboard.  </h1>
       <p style={{color: '#fff'}}>  Inspect, Create, Amend, Delete your budgets. </p>
-      <div style={{ width: '100%', textAlign: 'center', height: 50, marginTop: 60, marginBottom: 30 }}> Some of my comercials banners </div>
+      <div className='show__desktop__only' style={{ width: '100%', textAlign: 'center', height: 50, marginTop: 60, marginBottom: 30 }}> Some of my comercials banners </div>
       <div className='dashboard__content'>
         <SelectedBudget loading={props.loading} budgets={props.budgets}  selectedBudget={slectedState} setSelectedBudget={setSelectedState}/>
         <BudgetsList 

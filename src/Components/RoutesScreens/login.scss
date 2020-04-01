@@ -28,10 +28,15 @@
 }
 
 .rootApp {
+  padding: 0px 8px;
   .MuiPaper-rounded {
     margin-top: 32px;
-    @include for-tablet-landscape-up {
+    
+    @include for-tablet-portrait-up {
       margin-top: 120px;
     }
+  }
+  @include for-tablet-portrait-up {
+    padding: 0px 16px;
   }
 }

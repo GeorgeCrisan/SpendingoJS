@@ -33,9 +33,9 @@ export default function SelectedBudget(props) {
     <>
       {!loading && <div className='current__budget__wrapper'>
         <Grow in={checked}>
-          <Paper elevation={4} >
-            <Container className={`current__budget__content`} maxWidth="md">
-              {sb && <div style={{ height: 450 }}>
+          <Paper elevation={4} style={{overflow: 'scroll', height: 483, display: 'flex'}} >
+            <Container className={`current__budget__content`} style={{display: 'flex'}} maxWidth="md">
+              {sb && <div>
                 <h2 style={{color: '#2196f3',marginTop: 0 }}>
                    <CalendarViewDayOutlinedIcon style={{marginRight: 8, color: '#2196f3', position: 'relative', top: 4}} />
                    {!props.selectedBudget.userSelected ? 'Latest Budget' : 'Selected Budget'}
@@ -52,15 +52,15 @@ export default function SelectedBudget(props) {
                   </Button>
                 </div>
               </div>}
-              {!sb && <div style={{ height: 450, display: 'flex', flexFlow: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                <h2 style={{ paddingTop: 16, borderBottom: 'none', color: '#2196F3' }}> <NotesIcon style={{ fontSize: 40, position: 'relative', top: 12, right: 4 }} />
+              {!sb && <div style={{display: 'flex', flexFlow: 'column',  alignItems: 'center', justifyContent: 'center' }}>
+                <h2 style={{alignSelf: 'center', paddingTop: 16, borderBottom: 'none', color: '#2196F3' }}> <NotesIcon style={{ fontSize: 40, position: 'relative', top: 12, right: 4 }} />
                   Please create a budget. Soon as budget is created, relevant data is displayed here.
                 </h2>
               </div>}
             </Container>
           </Paper>
         </Grow>
-        <div style={{ width: '100%' }}>
+        <div className='show__desktop__only' style={{ width: '100%' }}>
           <Button size='large' variant="outlined" onClick={() => { }} className={'current__budget__button current__budget__button--expanded'} >
             <EditIcon style={{ fontSize: 16, marginRight: 6, color: '#2196F3'}} /> Manage Account
                 </Button>

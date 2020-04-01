@@ -7,6 +7,7 @@ import AddIcon from '@material-ui/icons/Add';
 import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
 import FormatListNumberedOutlinedIcon from '@material-ui/icons/FormatListNumberedOutlined';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+import EditIcon from '@material-ui/icons/Edit';
 import Drawer from '@material-ui/core/Drawer';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
@@ -162,6 +163,14 @@ export default function BudgetsList(props) {
 
 
   return (<div className='budgetlist__wrapper' style={{ display: 'flex', flexFlow: 'column' }}>
+    <div className='show__mobile__only' style={{ width: '100%', marginBottom: 32 }}>
+      <Button size='large' variant="outlined"
+        onClick={() => { if (budgets && budgets.length < 10) { setShowForm(!showForm); } }}
+        className={'current__budget__button current__budget__button--expanded'} >
+        <AddIcon style={{ fontSize: 16, marginRight: 6, color: '#4BB543' }} />
+        <span style={{ color: '#fff' }} > {budgets && budgets.length >= 10 ? 'Max of 10 reached!' : 'Add new budget'}</span>
+      </Button>
+    </div>
     <Paper elevation={4} className='budgetlist__container'>
       <h2 style={{ color: '#2196F3', lineHeight: '2em', borderBottom: '2px  dashed #2196f3 ', marginLeft: 16, marginRight: 16 }}>
         <FormatListNumberedOutlinedIcon style={{ position: 'relative', top: 4 }} /> Budgets list
@@ -174,14 +183,14 @@ export default function BudgetsList(props) {
         {(!budgets || budgets && budgets.length === 0) &&
           <h2 style={{ paddingTop: 16, marginTop: 100, borderBottom: 'none', color: '#2196F3', lineHeight: '2.2' }}>
             <InfoOutlinedIcon style={{ fontSize: 36, position: 'relative', top: 10, right: 6 }} />
-              No budgets yet. What are you waiting for :) ?
+              No budgets created yet. What are you waiting for?
             </h2>}
         {props.loading && <div style={{ padding: 32, width: '100%', display: 'flex', justifyContent: 'center' }}>
           <Loader />
         </div>}
       </Container>
     </Paper>
-    <div style={{ width: '100%' }}>
+    <div className='show__desktop__only' style={{ width: '100%' }}>
       <Button size='large' variant="outlined"
         onClick={() => { if (budgets && budgets.length < 10) { setShowForm(!showForm); } }}
         className={'current__budget__button current__budget__button--expanded'} >
@@ -190,6 +199,11 @@ export default function BudgetsList(props) {
       </Button>
     </div>
     <BuddgetForm addBudgetAction={props.addBudgetAction} open={showForm} close={() => { setShowForm(false) }} />
+    <div className='show__mobile__only' style={{ width: '100%', marginTop: 16 }}>
+          <Button size='large' variant="outlined" onClick={() => { }} className={'current__budget__button current__budget__button--expanded'} >
+            <EditIcon style={{ fontSize: 16, marginRight: 6, color: '#2196F3'}} /> Manage Account
+                </Button>
+    </div>
   </div>
   );
 };

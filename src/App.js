@@ -20,7 +20,7 @@ function App(props) {
   const { isAuthenticated, isVerifying  /*,user*/ } = props;
 
   return (
-    <div className="rootApp" style={{ maxWidth: 1000, padding: "0px 16px", margin: '16px auto auto' }}>
+    <div className="rootApp" style={{ maxWidth: 1000, margin: '16px auto auto' }}>
       <AppHeader isAuthenticated={isAuthenticated} isVerifying={isVerifying} />
       <Switch>
         <ProtectedRoute exact path='/userhome' component={UserDashboard} isAuthenticated={isAuthenticated} isVerifying={isVerifying} />
