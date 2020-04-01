@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {fetchBudgets} from '../../actions';
+import {fetchBudgets, addBudget, removeBudget} from '../../actions';
 import './userdashboard.scss';
 import {connect} from 'react-redux';
 
@@ -11,14 +11,21 @@ import SelectedBudget from '../SelectedBudget.react';
 import BudgetsList from '../BudgetsList.react';
 
 const UserDashboard = (props) => {
-  
+  const {dispatch} = props;
   let [slectedState, setSelectedState] = React.useState({
     userSelected: false,
     selectedBudget: false
   });
 
+  function removeBudgetAction(docid) {
+    dispatch(removeBudget(docid));
+  }
+
+  function addBudgetAction(fbobj) {
+    dispatch(addBudget(fbobj));
+  }
+
   useEffect(()=>{
-    const { dispatch } = props;
       dispatch(fetchBudgets());
   },[]);
 
@@ -32,7 +39,12 @@ const UserDashboard = (props) => {
       <div style={{ width: '100%', textAlign: 'center', height: 50, marginTop: 60, marginBottom: 30 }}> Some of my comercials banners </div>
       <div className='dashboard__content'>
         <SelectedBudget loading={props.loading} budgets={props.budgets}  selectedBudget={slectedState} setSelectedBudget={setSelectedState}/>
-        <BudgetsList loading={props.loading} budgets={props.budgets} />
+        <BudgetsList 
+          addBudgetAction={addBudgetAction}
+          loading={props.loading}
+          removeBudgetAction={removeBudgetAction}
+          budgets={props.budgets}
+        />
       </div>
       <div style={{ width: '100%', textAlign: 'center', height: 50, marginTop: 60}}> Some of my comercials banners </div>
      </div>);

@@ -26,6 +26,27 @@ const lberror = (err) => {
 
 //Define Thunks
 
+export const addBudget = (fbdoc)=> dispatch => {
+  fbdoc.ownerid = myFirebase.auth().currentUser.uid;
+  fbdoc.owner = myFirebase.auth().currentUser.email;
+
+  myFirebase.firestore().collection('budgets').add(fbdoc).then(()=>{
+      dispatch(fetchBudgets());
+    }).catch((err)=>{
+    //Handle if error 
+    });
+ };
+
+
+export const removeBudget = (docid) => dispatch => {
+  myFirebase.firestore().collection('budgets').doc(docid).delete().then(()=>{
+    dispatch(fetchBudgets());
+  }).catch((err)=>{
+  //Handle if error 
+  });
+};
+ 
+
 export const fetchBudgets = () => dispatch => {
   dispatch(lbstart());
 
@@ -33,10 +54,10 @@ export const fetchBudgets = () => dispatch => {
     .where('ownerid', "==", myFirebase.auth().currentUser.uid)
     .orderBy('createddate', 'desc')
     .get().then((data) => {
-      
       let dataParsed = [];
       data = data.forEach((el) => {
-        dataParsed.push(el.data());
+        let newEl = {...el.data(), docid: el.id};
+        dataParsed.push(newEl);
       });
 
       dispatch(lbsuccess(dataParsed));
