@@ -32,7 +32,7 @@ const UserDashboard = (props) => {
       <div style={{ width: '100%', textAlign: 'center', height: 50, marginTop: 60, marginBottom: 30 }}> Some of my comercials banners </div>
       <div className='dashboard__content'>
         <SelectedBudget loading={props.loading} budgets={props.budgets}  selectedBudget={slectedState} setSelectedBudget={setSelectedState}/>
-        <BudgetsList budgets={props.budgets} />
+        <BudgetsList loading={props.loading} budgets={props.budgets} />
       </div>
       <div style={{ width: '100%', textAlign: 'center', height: 50, marginTop: 60}}> Some of my comercials banners </div>
      </div>);

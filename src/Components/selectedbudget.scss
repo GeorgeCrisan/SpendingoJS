@@ -37,14 +37,18 @@
   padding-bottom: 16px;
   p {
     color: #2196F3;
+    border-bottom: 2px solid rgba(25,33,22, 0.1);
+    border-radius: 1px;
+    line-height: 1.5em;
   }
   span {
-    color: #f25e7f;
+   //color: #f25e7f;
+   color: #555;
     margin-left: 8px;
   }
   h2 {
-    line-height: 1.4;
-    border-bottom: 2px  solid #f25e7f ;
+    line-height: 2.2;
+    border-bottom: 2px  dashed #2196f3;
   }
 }
 
@@ -75,10 +79,14 @@
   &--expanded.success {
     border: 2px solid #4BB543 !important;
   }
+  &--expanded.defaultblue {
+    border: 2px solid #2196F3 !important;
+    justify-content: flex-start;
+  }
 }
 
 .budgetlist__container {
-  height: 366px;
+  height: 462px;
   border: 2px solid #fff;
   border-radius: 5px;
 }

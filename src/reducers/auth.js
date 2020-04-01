@@ -24,7 +24,10 @@ export default (state = {
   isAuthenticated: false,
   user: {}
 }, action) => {
-  console.log('Action Type:', action.type , 'Error:' ,(action?.error));
+  console.log('Action Type:', action.type );
+  if(action?.error) {
+    console.log( 'Error:' ,(action?.error));
+  } 
   switch (action.type) {
     case LOGIN_REQUEST:
       return {
