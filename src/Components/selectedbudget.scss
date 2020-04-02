@@ -37,11 +37,12 @@
 .current__budget__content {
   padding-bottom: 16px;
   p {
-    color: #2196F3;
+    color: #555;
     border-bottom: 2px solid rgba(25,33,22, 0.1);
     border-radius: 1px;
     line-height: 1.5em;
     svg {
+      color: #2196F3;
       position: relative;
       top: 6px;
     }
@@ -49,6 +50,7 @@
   span {
    //color: #f25e7f;
    color: #555;
+   color: #2196F3;
     margin-left: 8px;
   }
   h2 {

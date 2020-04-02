@@ -15,6 +15,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
+import Currency from './Currency';
 
 function BuddgetForm(props) {
 
@@ -151,11 +152,15 @@ export default function BudgetsList(props) {
         <Link style={{textDecoration: 'none', width: '100%'}} to={'/managebudget'} onClick={()=>{props.dispatch(selectedBudget(el));}}>
         <Button size='large' variant="outlined" className={'current__budget__button current__budget__button--expanded defaultblue'}>
           <div>
-            <div style={{ display: 'flex' }}>
-              <span style={{ color: '#2196F3', marginRight: 8 }}>{`${i + 1}.`}</span>
-              <span style={{ color: '#555', textTransform: 'capitalize' }} >{`${el.title}`}</span>
+            <div style={{ display: 'flex'}}>
+              <span style={{ color: '#555', marginRight: 8 }}>{`${i + 1}.`}</span>
+              <span style={{ color: '#2196F3', textTransform: 'capitalize' }} >{`${el.title}`}</span>
             </div>
-            <div style={{ color: '#555', fontSize: 12, textTransform: 'capitalize' }} > <span style={{ color: '#2196F3', marginRight: 2 }} > Created:</span> {moment.unix(el.createddate.seconds).format("DD MMM YYYY")}  </div>
+            <div style={{ color: '#555', fontSize: 12, textTransform: 'capitalize', display: 'flex', justifyContent: 'flex-start' }} >
+              <div style={{ display: 'inline-flex', marginLeft: 0 , flexFlow: 'row wrap'}}> <span>Created:</span> <span style={{ color: '#2196F3', marginRight: 2, marginLeft: 4 , display: 'inline'}}>{moment.unix(el.createddate.seconds).format("DD MMM YY")} </span> </div>
+              <div style={{ display: 'inline', marginLeft: 4 }}> Entries:<span style={{ color: '#2196F3', marginRight: 2 }}> {el.entries.length} </span> </div>
+              <div style={{ display: 'inline', marginLeft: 4 }} > Available: <span style={{ color: '#2196F3', marginRight: 2 }}> {el.total - el.progress}{<Currency currency={el.currency} />}  </span> </div>
+              </div>
           </div>
         </Button>
         </Link>

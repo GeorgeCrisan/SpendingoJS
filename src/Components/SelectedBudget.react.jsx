@@ -40,7 +40,8 @@ export default function SelectedBudget(props) {
                 <p> <AttachMoneyIcon style={{color: 'green'}} /> Total funds: <span>{sb.total}</span><Currency currency={sb.currency} /> </p>
                 <p> <MoneyOffOutlinedIcon /> Total spent: <span>{sb.progress}<Currency currency={sb.currency} /></span> </p>
                 <p> <AttachMoneyIcon style={{color: 'green'}} /> Available to spend: <span>{`${sb.total - sb.progress}`}<Currency currency={sb.currency} /></span> </p>
-                <p> <EventAvailableIcon /> Created: <span>{moment.unix(sb.createddate.seconds).format("DD MMM YYYY")}</span></p>
+                {false && <p> <EventAvailableIcon /> Created: <span>{moment.unix(sb.createddate.seconds).format("DD MMM YYYY")}</span> </p>}
+                
                 <div className='current__budget__button__wrapper'>
                     <Link onClick={()=>{props.dispatch(selectedBudget(sb))}} style={{textDecoration: 'none'}} to="/managebudget" >
                       <Button size='large' variant="outlined" className={'current__budget__button'} >
