@@ -38,8 +38,17 @@ const UserDashboard = (props) => {
       <p style={{color: '#fff'}}>  Inspect, Create, Amend, Delete your budgets. </p>
       <div className='show__desktop__only' style={{ width: '100%', textAlign: 'center', height: 50, marginTop: 60, marginBottom: 30 }}> Some of my comercials banners </div>
       <div className='dashboard__content'>
-        <SelectedBudget loading={props.loading} budgets={props.budgets}  selectedBudget={slectedState} setSelectedBudget={setSelectedState}/>
+        
+        <SelectedBudget 
+        dispatch={dispatch}
+        loading={props.loading}
+        budgets={props.budgets}
+        selectedBudget={slectedState}
+        setSelectedBudget={setSelectedState}
+        />
+
         <BudgetsList 
+          dispatch={dispatch}
           addBudgetAction={addBudgetAction}
           loading={props.loading}
           removeBudgetAction={removeBudgetAction}

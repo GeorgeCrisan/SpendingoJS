@@ -41,6 +41,10 @@
     border-bottom: 2px solid rgba(25,33,22, 0.1);
     border-radius: 1px;
     line-height: 1.5em;
+    svg {
+      position: relative;
+      top: 6px;
+    }
   }
   span {
    //color: #f25e7f;

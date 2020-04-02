@@ -1,11 +1,12 @@
 import {
   LOAD__BUDGET__ERROR,
   LOAD__BUDGET__START,
-  LOAD__BUDGET__SUCCESS
+  LOAD__BUDGET__SUCCESS,
+  SELECTED__BUDGET
 } from "../actions/";
 
 export default (state = {
-  error: { isError: false, message: "", statusCode: "" },
+  error: { isError: false, message: "", statusCode: "" , selectedBudget: false},
   budgets: [],
   loading: false
 }, action) => {
@@ -31,6 +32,13 @@ export default (state = {
         error: { isError: false, message: "", statusCode: "" },
         loading: false
       };
+
+    case SELECTED__BUDGET: 
+      console.log('actipn');
+      return {
+        ...state,
+        selectedBudget: action.payload
+      }
 
 
     default:

@@ -24,6 +24,7 @@ function BuddgetForm(props) {
     let objTS = { ...formState };
 
     objTS.createddate = new Date();
+    objTS.updateddate = objTS.createddate;
     objTS.progress = '0';
     objTS.entries = [];
     objTS.finalized = false;

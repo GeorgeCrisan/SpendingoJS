@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
+import './managebudget.scss';
+import React ,{ useState, useEffect } from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grow from '@material-ui/core/Grow';
 import { Container, Button } from '@material-ui/core';
-import Currency from './Currency';
-import Loader from './Loader';
+import Currency from '../Currency';
+import Loader from '../Loader';
 import moment from 'moment';
-import {Link } from 'react-router-dom';
-import {selectedBudget} from '../actions/budgets';
-import './selectedbudget.scss';
+import {connect} from 'react-redux';
+
 import NotesIcon from '@material-ui/icons/Notes';
 import EditIcon from '@material-ui/icons/Edit';
 import CalendarViewDayOutlinedIcon from '@material-ui/icons/CalendarViewDayOutlined';
@@ -17,33 +17,21 @@ import EventAvailableIcon from '@material-ui/icons/EventAvailable';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import MoneyOffOutlinedIcon from '@material-ui/icons/MoneyOffOutlined';
 
-export default function SelectedBudget(props) {
-
+function ManageBudget(props) {
+  let [localBudget, setLocalBudget] = useState({});
   const [checked, setChecked] = React.useState(false);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setChecked(true);
-    }, 400);
-  }, []);
-
-  useEffect(() => {
-    props.setSelectedBudget({ selectedBudget: props.budgets[0], userSelected: false });
-  }, [props.budgets]);
-
-  let sb = props.selectedBudget.selectedBudget;
+  let sb = props.sb;
   let loading = props.loading;
-
   return (
     <>
-      {!loading && <div className='current__budget__wrapper'>
+      {!loading && sb && <div className='current__budget__wrapper'>
         <Grow in={checked}>
           <Paper elevation={4} style={{overflow: 'scroll', height: 483, display: 'flex'}} >
             <Container className={`current__budget__content`} style={{display: 'flex'}} maxWidth="md">
-              {sb && <div style={{width: '100%'}}>
+              { <div style={{width: '100%'}}>
                 <h2 style={{color: '#2196f3',marginTop: 0 }}>
                    <CalendarViewDayOutlinedIcon style={{marginRight: 8, color: '#2196f3', position: 'relative', top: 4}} />
-                   {!props.selectedBudget.userSelected ? 'Latest Budget' : 'Selected Budget'}
+                   {'Some data budget title'}
                 </h2>
                 <p> <TitleIcon />  Budget title: <span> {sb.title}</span>  </p>
                 <p> <DescriptionOutlinedIcon /> Description: <span>{sb.description}</span>  </p>
@@ -52,11 +40,9 @@ export default function SelectedBudget(props) {
                 <p> <AttachMoneyIcon style={{color: 'green'}} /> Available to spend: <span>{`${sb.total - sb.progress}`}<Currency currency={sb.currency} /></span> </p>
                 <p> <EventAvailableIcon /> Created: <span>{moment.unix(sb.createddate.seconds).format("DD MMM YYYY")}</span></p>
                 <div className='current__budget__button__wrapper'>
-                    <Link onClick={()=>{props.dispatch(selectedBudget(sb))}} style={{textDecoration: 'none'}} to="/managebudget" >
-                      <Button size='large' variant="outlined" className={'current__budget__button'} >
-                        Manage
-                    </Button>
-                  </Link>
+                  <Button size='large' variant="outlined" className={'current__budget__button'} >
+                    Manage
+                  </Button>
                 </div>
               </div>}
               {!sb && <div style={{display: 'flex', flexFlow: 'column',  alignItems: 'center', justifyContent: 'center' }}>
@@ -66,14 +52,21 @@ export default function SelectedBudget(props) {
               </div>}
             </Container>
           </Paper>
-        </Grow>
-        <div className='show__desktop__only' style={{ width: '100%' }}>
-          <Button size='large' variant="outlined" onClick={() => { }} className={'current__budget__button current__budget__button--expanded'} >
-            <EditIcon style={{ fontSize: 16, marginRight: 6, color: '#2196F3'}} /> Manage Account
-                </Button>
-        </div>
+        </Grow> 
       </div>}
       {loading && <Loader />}
     </>
   );
-};
+}
+
+function mapStateToProps(state) {
+  return {
+    isAuthenticated: state.auth.isAuthenticated,
+    isVerifying: state.auth.isVerifying,
+    user: state.auth.user,
+    selectedBudget: state.budgets.selectedBudget,
+    loading: state.budgets.loading
+  };
+}
+
+export default connect(mapStateToProps)(ManageBudget);

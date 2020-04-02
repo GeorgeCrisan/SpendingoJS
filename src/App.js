@@ -9,6 +9,7 @@ import ProtectedRoute from "./Components/ProtectedRoute";
 import AppHeader from "./Components/AppHeader.react";
 import Login from "./Components/RoutesScreens/Login.react";
 import UserDashboard from "./Components/RoutesScreens/UserDashboard.react";
+import ManageBudget from "./Components/RoutesScreens/ManageBudget.react";
 import FPContent from "./Components/RoutesScreens/FPContent.react";
 import Signup from "./Components/RoutesScreens/Signup.react";
 import CookieConsent from "react-cookie-consent";
@@ -23,7 +24,8 @@ function App(props) {
     <div className="rootApp" style={{ maxWidth: 1000, margin: '16px auto auto' }}>
       <AppHeader isAuthenticated={isAuthenticated} isVerifying={isVerifying} />
       <Switch>
-        <ProtectedRoute exact path='/userhome' component={UserDashboard} isAuthenticated={isAuthenticated} isVerifying={isVerifying} />
+        <ProtectedRoute exact path='/userhome' component={UserDashboard} isAuthenticated={isAuthenticated} isVerifying={isVerifying} ></ProtectedRoute>
+        <ProtectedRoute exact path='/managebudget' component={ManageBudget} isAuthenticated={isAuthenticated} isVerifying={isVerifying} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/" component={FPContent} />

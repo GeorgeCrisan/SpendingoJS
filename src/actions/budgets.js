@@ -4,11 +4,21 @@ export const LOAD__BUDGET__START = 'LOAD__BUDGET__START';
 export const LOAD__BUDGET__SUCCESS = 'LOAD__BUDGET__SUCCESS';
 export const LOAD__BUDGET__ERROR = 'LOAD__BUDGET__ERROR';
 
+export const SELECTED__BUDGET = 'SELECTED__BUDGET';
+
 const lbstart = () => {
   return {
     type: LOAD__BUDGET__START
   };
 };
+
+export const selectedBudget = (budget) => {
+  console.log(budget, ' action clicked ');
+  return {
+    type: SELECTED__BUDGET,
+    payload: budget
+  }
+}
 
 const lbsuccess = (collection) => {
   return {
@@ -52,7 +62,7 @@ export const fetchBudgets = () => dispatch => {
 
   myFirebase.firestore().collection('budgets')
     .where('ownerid', "==", myFirebase.auth().currentUser.uid)
-    .orderBy('createddate', 'desc')
+    .orderBy('updateddate', 'desc')
     .get().then((data) => {
       let dataParsed = [];
       data = data.forEach((el) => {
