@@ -3,13 +3,14 @@ import { Container, Button, Paper, TextField } from '@material-ui/core';
 import Loader from './Loader';
 import moment from 'moment';
 import AddIcon from '@material-ui/icons/Add';
+import {Link} from 'react-router-dom';
 //import DeleteIcon from '@material-ui/icons/Delete';
 import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
 import FormatListNumberedOutlinedIcon from '@material-ui/icons/FormatListNumberedOutlined';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import EditIcon from '@material-ui/icons/Edit';
 import Drawer from '@material-ui/core/Drawer';
-import FormHelperText from '@material-ui/core/FormHelperText';
+import {selectedBudget} from '../actions/budgets';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -147,6 +148,7 @@ export default function BudgetsList(props) {
     budgets = props.budgets.map((el, i) => {
 
       return (<div key={i + 1} style={{ display: 'flex', flexFlow: 'row nowrap' }}>
+        <Link style={{textDecoration: 'none', width: '100%'}} to={'/managebudget'} onClick={()=>{props.dispatch(selectedBudget(el));}}>
         <Button size='large' variant="outlined" className={'current__budget__button current__budget__button--expanded defaultblue'}>
           <div>
             <div style={{ display: 'flex' }}>
@@ -156,6 +158,7 @@ export default function BudgetsList(props) {
             <div style={{ color: '#555', fontSize: 12, textTransform: 'capitalize' }} > <span style={{ color: '#2196F3', marginRight: 2 }} > Created:</span> {moment.unix(el.createddate.seconds).format("DD MMM YYYY")}  </div>
           </div>
         </Button>
+        </Link>
         <DeleteForeverOutlinedIcon onClick={() => { props.removeBudgetAction(el.docid) }} style={{ cursor: 'pointer', alignSelf: 'center', color: '#2196F3', marginLeft: 16, marginTop: 16 }} />
       </div>);
 

@@ -19,19 +19,9 @@ import MoneyOffOutlinedIcon from '@material-ui/icons/MoneyOffOutlined';
 
 export default function SelectedBudget(props) {
 
-  const [checked, setChecked] = React.useState(false);
+  const [checked, setChecked] = React.useState(true);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setChecked(true);
-    }, 400);
-  }, []);
-
-  useEffect(() => {
-    props.setSelectedBudget({ selectedBudget: props.budgets[0], userSelected: false });
-  }, [props.budgets]);
-
-  let sb = props.selectedBudget.selectedBudget;
+  let sb = props?.selectedBudgetFromStore ? props.selectedBudgetFromStore : props.budgets[0];
   let loading = props.loading;
 
   return (
@@ -43,7 +33,7 @@ export default function SelectedBudget(props) {
               {sb && <div style={{width: '100%'}}>
                 <h2 style={{color: '#2196f3',marginTop: 0 }}>
                    <CalendarViewDayOutlinedIcon style={{marginRight: 8, color: '#2196f3', position: 'relative', top: 4}} />
-                   {!props.selectedBudget.userSelected ? 'Latest Budget' : 'Selected Budget'}
+                   {!props.selectedBudgetFromStore ? 'Latest Budget' : 'Selected Budget'}
                 </h2>
                 <p> <TitleIcon />  Budget title: <span> {sb.title}</span>  </p>
                 <p> <DescriptionOutlinedIcon /> Description: <span>{sb.description}</span>  </p>

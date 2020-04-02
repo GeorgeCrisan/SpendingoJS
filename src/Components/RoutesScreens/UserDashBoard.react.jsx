@@ -12,10 +12,6 @@ import BudgetsList from '../BudgetsList.react';
 
 const UserDashboard = (props) => {
   const {dispatch} = props;
-  let [slectedState, setSelectedState] = React.useState({
-    userSelected: false,
-    selectedBudget: false
-  });
 
   function removeBudgetAction(docid) {
     dispatch(removeBudget(docid));
@@ -43,8 +39,7 @@ const UserDashboard = (props) => {
         dispatch={dispatch}
         loading={props.loading}
         budgets={props.budgets}
-        selectedBudget={slectedState}
-        setSelectedBudget={setSelectedState}
+        selectedBudgetFromStore={props.selectedBudget}
         />
 
         <BudgetsList 
@@ -63,6 +58,7 @@ const mapStateToProps = (state) => {
   return { 
     budgets: state.budgets.budgets,
     loading: state.budgets.loading,
+    selectedBudget: state.budgets.selectedBudget,
     error: state.budgets.error
   };
 };

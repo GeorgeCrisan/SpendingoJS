@@ -39,4 +39,13 @@
   @include for-tablet-portrait-up {
     padding: 0px 16px;
   }
+  .current__budgetselected__wrapper {
+    .MuiPaper-rounded {
+      margin-top: 32px;
+      
+      @include for-tablet-portrait-up {
+        margin-top: 32px;
+      }
+    }
+  }
 }

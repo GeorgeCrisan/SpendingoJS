@@ -13,7 +13,6 @@ const lbstart = () => {
 };
 
 export const selectedBudget = (budget) => {
-  console.log(budget, ' action clicked ');
   return {
     type: SELECTED__BUDGET,
     payload: budget

@@ -69,6 +69,12 @@
     color: #2196F3;
   }
 
+  &--back {
+    .MuiButton-label {
+      color: #fff;
+    }
+  }
+
   &--expanded {
     width: 100%;
     margin-top: 16px !important;
