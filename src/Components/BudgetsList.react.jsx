@@ -159,8 +159,8 @@ export default function BudgetsList(props) {
             <div style={{ color: '#555', fontSize: 12, textTransform: 'capitalize', display: 'flex', justifyContent: 'flex-start' }} >
               <div style={{ display: 'inline-flex', marginLeft: 0 , flexFlow: 'row wrap'}}> <span>Created:</span> <span style={{ color: '#2196F3', marginRight: 2, marginLeft: 4 , display: 'inline'}}>{moment.unix(el.createddate.seconds).format("DD MMM YY")} </span> </div>
               <div style={{ display: 'inline', marginLeft: 4 }}> Entries:<span style={{ color: '#2196F3', marginRight: 2 }}> {el.entries.length} </span> </div>
-              <div style={{ display: 'inline', marginLeft: 4 }} > Available: <span style={{ color: '#2196F3', marginRight: 2 }}> {el.total - el.progress}{<Currency currency={el.currency} />}  </span> </div>
-              </div>
+            </div>
+            <div style={{ display: 'inline', marginLeft: 4, color: '#555' }} > Available: <span style={{ color: '#2196F3', marginRight: 2 }}> {Number(Number(el.total) - Math.abs(el.progress)).toFixed(2)}{<Currency currency={el.currency} />}  </span> </div>
           </div>
         </Button>
         </Link>

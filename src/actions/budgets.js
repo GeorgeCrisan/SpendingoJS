@@ -1,4 +1,4 @@
-import { myFirebase } from "../firebase/firebase";
+import { myFirebase, db } from "../firebase/firebase";
 
 export const LOAD__BUDGET__START = 'LOAD__BUDGET__START';
 export const LOAD__BUDGET__SUCCESS = 'LOAD__BUDGET__SUCCESS';
@@ -6,11 +6,35 @@ export const LOAD__BUDGET__ERROR = 'LOAD__BUDGET__ERROR';
 
 export const SELECTED__BUDGET = 'SELECTED__BUDGET';
 
+export const ADDENTRY__START = 'ADDENTRY__START';
+export const ADDENTRY__DONE = 'ADDENTRY__DONE';
+export const ADDENTRY__ERROR = 'ADDENTRY__ERROR';
+
 const lbstart = () => {
   return {
     type: LOAD__BUDGET__START
   };
 };
+
+export const addestart = () => {
+  return {
+    type: ADDENTRY__START
+  };
+}
+
+export const addedone = (el) => {
+  return {
+    type: ADDENTRY__DONE,
+    payload: el
+  };
+}
+
+export const addefail = (er) => {
+  return {
+    type: ADDENTRY__ERROR,
+    error: er
+  };
+}
 
 export const selectedBudget = (budget) => {
   return {
@@ -18,6 +42,7 @@ export const selectedBudget = (budget) => {
     payload: budget
   }
 }
+
 
 const lbsuccess = (collection) => {
   return {
@@ -46,6 +71,22 @@ export const addBudget = (fbdoc)=> dispatch => {
     });
  };
 
+
+
+ export const addEntry = (budget) => dispatch => {
+  dispatch(addestart());
+  db.collection('budgets').doc(budget.docid).update({
+    progress: budget.progress,
+    entries: budget.entries,
+    finalized: budget.finalized
+  }).then((data)=>{
+    console.log('update complete ', data);
+    dispatch(addedone(data));
+  }).catch((err)=>{
+    console.log('err on update', err);
+    dispatch(addefail(err)); 
+  });
+}
 
 export const removeBudget = (docid) => dispatch => {
   myFirebase.firestore().collection('budgets').doc(docid).delete().then(()=>{

@@ -138,3 +138,26 @@
     display: block;
   }
 }
+
+.entry__item__cont {
+  margin: 16px;
+  border-bottom: 2px solid rgba(25,33,22, 0.1);
+  @include for-tablet-portrait-up {
+    display: flex;
+    justify-content: space-evenly;
+    flex-flow: row nowrap;
+    text-align: left;
+  }
+  .entry__item__deep {
+    width: 100%;
+  }
+}
+
+.current__budgetselected__paper {
+  overflow: scroll;
+  display: flex;
+  height: 483px;
+  @include for-tablet-portrait-up {
+    height: 700px;
+  }
+}
