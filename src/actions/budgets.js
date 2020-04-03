@@ -80,10 +80,8 @@ export const addBudget = (fbdoc)=> dispatch => {
     entries: budget.entries,
     finalized: budget.finalized
   }).then((data)=>{
-    console.log('update complete ', data);
     dispatch(addedone(data));
   }).catch((err)=>{
-    console.log('err on update', err);
     dispatch(addefail(err)); 
   });
 }

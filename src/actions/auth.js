@@ -129,13 +129,11 @@ const passRequestFail = (err) => {
 
 //Thunks
 export const passwordReset = (email) => dispatch => {
-  console.log('email', email);
   dispatch(passRequestStart());
   myFirebase
   .auth()
   .sendPasswordResetEmail(email)
   .then((data)=>{
-    console.log(data);
     dispatch(passRequestSuccess(data));
   })
   .catch((err)=>{

@@ -25,9 +25,6 @@ const UserDashboard = (props) => {
       dispatch(fetchBudgets());
   },[]);
 
-  useEffect(()=>{
-    console.log('props have changes', props);
-  },[props.budgets, props.loading]);
 
   return (<div className='dashboard__wrapper' >
       <h1 style={{color: '#fff'}}> <DashboardIcon style={{fontSize: 36, color: '#f25e7f', position: 'relative', top: 5}} /> Dashboard.  </h1>

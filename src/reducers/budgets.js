@@ -10,7 +10,7 @@ export default (state = {
   budgets: [],
   loading: false
 }, action) => {
-  console.log('Action Type:', action.type , 'Error:' ,(action?.error));
+  console.log('Action Type:', action.type);
   switch (action.type) {
     case LOAD__BUDGET__START:
       return {
@@ -34,7 +34,6 @@ export default (state = {
       };
 
     case SELECTED__BUDGET: 
-      console.log('actipn');
       return {
         ...state,
         selectedBudget: action.payload

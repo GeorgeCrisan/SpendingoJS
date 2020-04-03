@@ -102,7 +102,7 @@
   height: 480px;
   border: 2px solid #fff;
   border-radius: 5px;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .add__budget__fieldswrapper {
@@ -154,7 +154,7 @@
 }
 
 .current__budgetselected__paper {
-  overflow: scroll;
+  overflow: auto;
   display: flex;
   height: 483px;
   @include for-tablet-portrait-up {
