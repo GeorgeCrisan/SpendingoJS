@@ -92,7 +92,7 @@ export default function FPContent() {
               <h2> Motivation. </h2>
               <p><DoneAllIcon /> If you have the habit to allocate certain amount of money towards different plans, this is perfect for you.</p>
               <p><DoneAllIcon /> Plan your holiday budget, plan your wedding budget and spendings, plan an event. </p>
-              <p><DoneAllIcon /> Spendingojs aims to help you organsie yourself easily. Now on mobile, tablet or desktop.</p>
+              <p><DoneAllIcon /> Spendingojs aims to help you organize yourself easily. </p>
               <p><DoneAllIcon /> Now on mobile, tablet or desktop. Soon in app store.</p>
             </Container>
           </Paper>
