@@ -164,7 +164,7 @@ export default function BudgetsList(props) {
           </div>
         </Button>
         </Link>
-        <DeleteForeverOutlinedIcon onClick={() => { props.removeBudgetAction(el.docid) }} style={{ cursor: 'pointer', alignSelf: 'center', color: '#2196F3', marginLeft: 16, marginTop: 16 }} />
+        <DeleteForeverOutlinedIcon onClick={() => { props.removeBudgetAction(el.docid) }} style={{ cursor: 'pointer', alignSelf: 'center', color: 'rgba(242, 94, 127 , 0.8)', marginLeft: 16, marginTop: 16 }} />
       </div>);
 
     });

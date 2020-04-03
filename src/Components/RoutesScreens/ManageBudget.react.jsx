@@ -40,8 +40,8 @@ function ManageBudget(props) {
   if(entries && entries.length > 0) {
     prepEntries = entries.map((el, key)=>{
       console.log(el);
-      return (<div  className='entry__item__cont'  key={key}> 
-                            <div className='entry__item__deep'>  Entry added: <span style={{ marginRight: 8, color: '#2196F3'}}>{moment.unix(el.created / 1000).format('Do MM YYYY hh:mm')}</span></div> 
+      return (<div  className='entry__item__cont'  key={key}>  
+                            <div className='entry__item__deep'> <span className='show__desktop__only' style={{ marginRight: 8, color: '#2196F3'}}> {key+1}. </span>   Entry added: <span style={{ marginRight: 8, color: '#2196F3'}}>{moment.unix(el.created / 1000).format('Do MM YYYY hh:mm')}</span></div> 
                             <div className='entry__item__deep'>  Type: <span style={{ marginRight: 8, color: '#2196F3'}} >{el.type == 'add' ? 'Add' : 'Subtract' } </span> </div> 
                             <div className='entry__item__deep'>  Value: <span style={{ marginRight: 8, color: '#2196F3'}}> {el.value}<Currency currency={Number(sb.currency).toFixed(2)}/></span> </div> 
               </div>);
