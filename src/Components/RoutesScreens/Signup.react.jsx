@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { createUser } from "../../actions";
 import { withStyles } from "@material-ui/styles";
+import ReCAPTCHA from "react-google-recaptcha";
 
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
 import {Typography, Paper, Container, TextField, Button, Avatar} from "@material-ui/core";
@@ -40,7 +41,11 @@ const Signup = (props) => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [dnerror, setDnerror] = useState(false);
+  let [capval, setCapval] = useState(false);
 
+  function onChange(value) {
+    setCapval(value);
+  }
 
   const handleChange = ({target}, type) => {
 
@@ -111,6 +116,11 @@ const Signup = (props) => {
         id="password"
         onChange={(ev)=>{handleChange(ev,'password')}}
       />
+      <ReCAPTCHA
+      style={{marginTop: 16}}
+    sitekey="6LcaU-YUAAAAAAAB-QfdHytGq5jkstCC56utcc1F"
+    onChange={onChange}
+    />
       {loginError && (
         <Typography component="p" className={classes.errorText}>
           Incorrect email or password.
@@ -127,6 +137,7 @@ const Signup = (props) => {
       </Typography>
       )}
       <Button
+        disabled={!capval}
         type="button"
         fullWidth
         variant="contained"
