@@ -11,7 +11,7 @@ import SelectedBudget from '../SelectedBudget.react';
 import BudgetsList from '../BudgetsList.react';
 
 const UserDashboard = (props) => {
-  const {dispatch} = props;
+  const {dispatch, user} = props;
 
   function removeBudgetAction(docid) {
     dispatch(removeBudget(docid));
@@ -24,12 +24,12 @@ const UserDashboard = (props) => {
   useEffect(()=>{
       dispatch(fetchBudgets());
   },[]);
-
-
+console.log(user.displayName, 'what are props');
+  let userName = user.displayName;
   return (<div className='dashboard__wrapper' >
-      <h1 style={{color: '#fff'}}> <DashboardIcon style={{fontSize: 36, color: '#f25e7f', position: 'relative', top: 5}} /> Dashboard.  </h1>
+      <h1 style={{color: '#fff'}}> <DashboardIcon style={{fontSize: 36, color: '#f25e7f', position: 'relative', top: 5}} /> Dashboard. {userName ? `Hi, ${userName}`: null} </h1>
       <p style={{color: '#fff'}}>  Inspect, Create, Amend, Delete your budgets. </p>
-      <div className='show__desktop__only' style={{ width: '100%', textAlign: 'center', height: 50, marginTop: 60, marginBottom: 30 }}> Some of my comercials banners </div>
+      { false && <div className='show__desktop__only' style={{ width: '100%', textAlign: 'center', height: 50, marginTop: 60, marginBottom: 30 }}> Some of my comercials banners </div>}
       <div className='dashboard__content'>
         
         <SelectedBudget 
@@ -47,7 +47,7 @@ const UserDashboard = (props) => {
           budgets={props.budgets}
         />
       </div>
-      <div style={{ width: '100%', textAlign: 'center', height: 50, marginTop: 60}}> Some of my comercials banners </div>
+      {false && <div style={{ width: '100%', textAlign: 'center', height: 50, marginTop: 60}}> Some of my comercials banners </div>}
      </div>);
 };
 

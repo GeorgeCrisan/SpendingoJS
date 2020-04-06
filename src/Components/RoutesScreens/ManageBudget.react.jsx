@@ -91,7 +91,7 @@ function ManageBudget(props) {
     <>
       <h1 style={{ color: '#fff' }}> <DataUsageIcon style={{ fontSize: 36, color: '#f25e7f', position: 'relative', top: 5 }} /> Manage {sb?.title ? sb.title : 'budget'}.  </h1>
       <p style={{ color: '#fff' }}>  Inspect, Amend, Delete your selected budget. </p>
-      <div className='show__desktop__only' style={{ width: '100%', textAlign: 'center', height: 50, marginTop: 60, marginBottom: 0 }}> Some of my comercials banners </div>
+      {false && <div className='show__desktop__only' style={{ width: '100%', textAlign: 'center', height: 50, marginTop: 60, marginBottom: 0 }}> Some of my comercials banners </div>}
 
       {!sb && <div style={{ display: 'flex', flexFlow: 'column', height: 200, width: '100%', justifyContent: 'center', alignItems: 'center ' }}>
         <h2 style={{ color: '#fff' }}> Nothing here? You must be lost ...   </h2>
@@ -165,7 +165,7 @@ function ManageBudget(props) {
         </Grow>
       </div>}
       {loading && <Loader />}
-      <div style={{ width: '100%', textAlign: 'center', height: 50, marginTop: 60, marginBottom: 30 }}> Some of my comercials banners </div>
+      {false && <div style={{ width: '100%', textAlign: 'center', height: 50, marginTop: 60, marginBottom: 30 }}> Some of my comercials banners </div>}
     </>
   );
 }

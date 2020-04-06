@@ -18,13 +18,13 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import './app.scss';
 
 function App(props) {
-  const { isAuthenticated, isVerifying  /*,user*/ } = props;
+  const { isAuthenticated, isVerifying  ,user } = props;
 
   return (
     <div className="rootApp" style={{ maxWidth: 1000, margin: '16px auto auto' }}>
       <AppHeader isAuthenticated={isAuthenticated} isVerifying={isVerifying} />
       <Switch>
-        <ProtectedRoute exact path='/userhome' component={UserDashboard} isAuthenticated={isAuthenticated} isVerifying={isVerifying} ></ProtectedRoute>
+        <ProtectedRoute exact path='/userhome' component={()=>{return (<UserDashboard user={user ? user : false} />)}} isAuthenticated={isAuthenticated} isVerifying={isVerifying} ></ProtectedRoute>
         <ProtectedRoute exact path='/managebudget' component={ManageBudget} isAuthenticated={isAuthenticated} isVerifying={isVerifying} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />

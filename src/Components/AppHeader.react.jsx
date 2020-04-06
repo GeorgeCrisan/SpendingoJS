@@ -16,7 +16,7 @@ const AppHeader = (props) => {
 
   return (<div className='main__header__wrapper'>
     <div className='main__header__inner' >
-      {!isAuthenticated && <div className='main__header__typo'>
+       <div className='main__header__typo show__desktop__only'>
         <Link style={{textDecoration: 'none'}} to='/'>
         <Typography component="h1" variant="h5">
           Welcome to Spendingojs
@@ -25,7 +25,7 @@ const AppHeader = (props) => {
           The Joy of managing any budget
         </Typography>
         </Link>
-      </div>}
+      </div>
       <div className='main__header__buttons'>
       {isAuthenticated && <Link style={{ textDecoration: 'none', marginRight: 16 }} to={'/userhome'} ><ButtonSpendingojs> Dashboard </ButtonSpendingojs></Link>}
       {isAuthenticated && <ButtonSpendingojs color='red' onClick={logout}>{'Logout'}</ButtonSpendingojs>}
