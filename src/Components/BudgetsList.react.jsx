@@ -217,7 +217,7 @@ export default function BudgetsList(props) {
         <EditIcon style={{ fontSize: 16, marginRight: 6, color: '#2196F3' }} /> Manage Account
                 </Button>
     </div>
-    <MyAccount maopen={maopen} onClose={()=>setMaOpen(false)} />
+    {maopen && <MyAccount maopen={maopen} onClose={()=>setMaOpen(false)} />}
   </div>
   </>);
 };

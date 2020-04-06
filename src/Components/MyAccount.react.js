@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Button, Paper, TextField } from '@material-ui/core';
 import moment from 'moment';
-import { passwordReset, deleteAccount } from "../actions";
+import { passwordReset, deleteAccount ,logoutUser } from "../actions";
 import Drawer from '@material-ui/core/Drawer';
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
@@ -56,7 +56,8 @@ function MyAccount(props) {
 
   console.log(accDeleted, 'what is it as default');
   if(accDeleted) {
-    return (<Redirect to="/" />);
+    dispatch(logoutUser());
+    //return (<Redirect to="/" />);
   }
   return (
     <Drawer anchor={'top'} open={props.maopen} onClose={props.onClose}>

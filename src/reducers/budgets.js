@@ -5,6 +5,7 @@ import {
   SELECTED__BUDGET,
   LOGIN_SUCCESS,
   LOGOUT_SUCCESS,
+  DELETE_ACCOUNT_SUCCESS,
 } from "../actions/";
 
 export default (state = {
@@ -19,6 +20,13 @@ export default (state = {
         ...state,
         loading: true
       };
+      case LOGOUT_SUCCESS:
+      case DELETE_ACCOUNT_SUCCESS:
+        return {
+          error: { isError: false, message: "", statusCode: "" , selectedBudget: false},
+          budgets: [],
+          loading: false
+        }
 
       case LOAD__BUDGET__ERROR:
         return {

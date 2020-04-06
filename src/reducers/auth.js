@@ -72,7 +72,8 @@ export default (state = {
         ...state,
         isLoggingIn: false,
         isAuthenticated: true,
-        user: action.payload
+        user: action.payload,
+        accountDeleted: false
       };
 
     case LOGIN_FAILURE:
@@ -96,7 +97,8 @@ export default (state = {
         ...state,
         isLoggingOut: false,
         isAuthenticated: false,
-        user: {}
+        user: {},
+        accountDeleted: false
       };
 
       case LOGOUT_FAILURE:
