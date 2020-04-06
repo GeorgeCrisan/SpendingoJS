@@ -87,6 +87,7 @@ export const addBudget = (fbdoc)=> dispatch => {
 }
 
 export const removeBudget = (docid) => dispatch => {
+  dispatch(selectedBudget(false));
   myFirebase.firestore().collection('budgets').doc(docid).delete().then(()=>{
     dispatch(fetchBudgets());
   }).catch((err)=>{
