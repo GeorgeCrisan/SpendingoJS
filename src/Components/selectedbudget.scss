@@ -171,15 +171,28 @@
 
 .entry__item__cont {
   margin: 16px;
+  padding-bottom: 16px;
   border-bottom: 2px solid rgba(25,33,22, 0.1);
   @include for-tablet-portrait-up {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     flex-flow: row nowrap;
     text-align: left;
   }
   .entry__item__deep {
+    margin-top: 8px;
     width: 100%;
+  }
+  @include for-tablet-portrait-up {
+    .entry__item__deep:nth-child(1) {
+      width: 28%;
+    } 
+    .entry__item__deep:nth-child(2) {
+      width: 48%;
+    } 
+    .entry__item__deep:nth-child(3) {
+      width: 20%;
+    } 
   }
 }
 

@@ -3,6 +3,7 @@
 body, html {
   background: rgb(36,36,120);
   background: linear-gradient(90deg, rgba(36,36,120,1) 13%, rgba(27,155,181,1) 100%);
+  background-attachment: fixed;
 }
 
 h1,h2,h3,h4,h5,p,div {

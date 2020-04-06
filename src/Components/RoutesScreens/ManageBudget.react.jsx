@@ -28,7 +28,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 function ManageBudget(props) {
 
   const [checked, setChecked] = React.useState(true);
-  const [formState, setFormState] = React.useState({type: 'add', description: '', value: '0', error: false, errorMsg: ''});
+  const [formState, setFormState] = React.useState({type: 'add', description: ' ', value: '0', error: false, errorMsg: ''});
 
   let sb = props.selectedBudget;
   let loading = props.loading;
@@ -40,9 +40,9 @@ function ManageBudget(props) {
   if(entries && entries.length > 0) {
     prepEntries = entries.map((el, key)=>{
       return (<div  className='entry__item__cont'  key={key}>  
-                            <div className='entry__item__deep'> <span className='show__desktop__only' style={{color: '#2196F3', display: 'inline'}}> {key+1}. </span>   Entry added: <span style={{ marginRight: 8, color: '#2196F3'}}>{moment.unix(el.created / 1000).format('Do MM YYYY hh:mm')}</span></div> 
-                            <div className='entry__item__deep'>  Type: <span style={{ marginRight: 8, color: '#2196F3'}} >{el.type == 'add' ? 'Add' : 'Subtract' } </span> </div> 
-                            <div className='entry__item__deep'>  Value: <span style={{ marginRight: 8, color: '#2196F3'}}> {Number(el.value).toFixed(2)}<Currency currency={sb.currency}/></span> </div> 
+                            <div className='entry__item__deep'>  {`${key + 1}. Entry added:`} <span style={{ marginRight: 8, color: '#2196F3'}}>{moment.unix(el.created / 1000).format('Do MM YYYY hh:mm')}</span></div> 
+                            <div className='entry__item__deep'>  Description: <span style={{ marginRight: 8, color: '#2196F3', wordBreak: 'break-all'}} >{el.description} </span> </div> 
+                            <div className='entry__item__deep'>  Value: <span style={{ marginRight: 8, color: '#2196F3'}}>  <Currency currency={sb.currency} /> {Number(el.value).toFixed(2)}</span> </div> 
               </div>);
     });
   }
@@ -112,11 +112,11 @@ function ManageBudget(props) {
                   <CalendarViewDayOutlinedIcon style={{ marginRight: 8, color: '#2196f3', position: 'relative', top: 4 }} />
                   {'Manage budget entries'}
                 </h2>
-                <p> <AttachMoneyIcon style={{ color: 'green' }} /> Budget value: <span>{Number(sb.total).toFixed(2)}</span><Currency currency={sb.currency} /> </p>
+                <p> <AttachMoneyIcon style={{ color: 'green' }} /> Budget value: <span> <Currency currency={sb.currency} /> {Number(sb.total).toFixed(2)}</span></p>
                 <p> <TitleIcon />  Budget title: <span> {sb.title}</span>  </p>
                 <p> <DescriptionOutlinedIcon /> Description: <span>{sb.description}</span>  </p>
-                <p> <MoneyOffOutlinedIcon /> Total spent: <span>{Math.abs(sb.progress).toFixed(2)}<Currency currency={sb.currency} /></span> </p>
-                <p> <AttachMoneyIcon style={{ color: 'green' }} /> Available to spend: <span>{`${Number(Number(sb.total).toFixed(2) - Math.abs(sb.progress).toFixed(2)).toFixed(2)}`}<Currency currency={sb.currency} /></span> </p>
+                <p> <MoneyOffOutlinedIcon /> Total spent: <span>  <Currency currency={sb.currency} /> {Math.abs(sb.progress).toFixed(2)} </span> </p>
+                <p> <AttachMoneyIcon style={{ color: 'green' }} /> Available to spend: <span> <Currency currency={sb.currency} />{` ${Number(Number(sb.total).toFixed(2) - Math.abs(sb.progress).toFixed(2)).toFixed(2)}`}</span> </p>
                 <p> <EventAvailableIcon /> Created: <span>{moment.unix(sb.createddate.seconds).format("DD MMM YYYY")}</span></p>
                 <div className='add__entry__wrapper'>
                 <TextField
@@ -138,6 +138,7 @@ function ManageBudget(props) {
             variant="outlined"
             margin="normal"
             id="description"
+            className='add__entry__desc'
             error={isValidLength('description', 100)}
             helperText={'Max 100 characters.'}
             label="Short description"
@@ -158,10 +159,10 @@ function ManageBudget(props) {
                 <MenuItem value={'remove'}> Subtract </MenuItem>
               </Select>
             </FormControl>}
-                  <Button size='large' variant="outlined" disabled={isValidTotal()} 
+                  <Button size='large' variant="outlined" disabled={(isValidTotal() || isValidLength('description', 100))} 
                     onClick={onAdd}
                    >
-                    {!isValidTotal() ? <AddIcon style={{ fontSize: 16, marginRight: 6, color: '#4BB543' }} /> : <span style={{color: 'red', fontSize: 12}}> Entry value to high </span>}
+                    {(!isValidTotal() && !isValidLength('description', 100)) ? <AddIcon style={{ fontSize: 16, marginRight: 6, color: '#4BB543' }} /> : <span style={{color: 'grey', fontSize: 12, position: 'relative', left: -6}}> Invalid </span>}
                   </Button>
                 </div>
                 {prepEntries.length > 0 && prepEntries}

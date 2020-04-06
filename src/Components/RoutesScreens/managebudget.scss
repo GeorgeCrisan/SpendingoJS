@@ -13,7 +13,14 @@
   .add__entry__value {
     width: 100%;
     @include for-tablet-portrait-up {
-      width: 28%;
+      width: 20%;
+    }
+  }
+
+  .add__entry__desc {
+    width: 100%;
+    @include for-tablet-portrait-up {
+      width: 50%;
     }
   }
 
