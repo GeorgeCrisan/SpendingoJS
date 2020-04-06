@@ -9,6 +9,10 @@ import {
   VERIFY_SUCCESS,
   CREATEUSER_ERROR,
   CREATEUSER_SUCCESS,
+  REQUEST_PASS_SUCCESS,
+  REQUEST_PASS_FAIL,
+  DELETE_ACCOUNT_SUCCESS,
+  DELETE_ACCOUNT_FAIL,
   //REATEUSER_REQUEST,
   //UPDATE_USER,
   UPDATE_USER_ERROR,
@@ -21,7 +25,10 @@ export default (state = {
   logginError: { isError: false, message: "", statusCode: "" },
   logoutError: { isError: false, message: "", statusCode: "" },
   createError: { isError: false, message: "", statusCode: "" },
+  resetPassErr: {isError: false, message: '', statusCode: ''},
+  deleteAccountErr: {isError: false, message: '', statusCode: ''},
   isAuthenticated: false,
+  accountDeleted: false,
   user: {}
 }, action) => {
   console.log('Action Type:', action.type );
@@ -29,6 +36,30 @@ export default (state = {
     console.log( 'Error:' ,(action?.error));
   } 
   switch (action.type) {
+    case DELETE_ACCOUNT_FAIL:
+      return {
+        ...state,
+        deleteAccountErr: { isError : true, message: action.error.message, statusCode: action.error.code }
+      };
+    case DELETE_ACCOUNT_SUCCESS:
+      return {
+        ...state,
+        user: {},
+        isAuthenticated: false,
+        accountDeleted: true
+      }
+    case REQUEST_PASS_FAIL:
+      return {
+        ...state,
+        resetPassErr: { isError : true, message: action.error.message, statusCode: action.error.code },
+      };
+
+    case REQUEST_PASS_SUCCESS:
+      return {
+        ...state,
+        resetPassErr: {isError: false, message: '', statusCode: ''}
+      }
+
     case LOGIN_REQUEST:
       return {
         ...state,

@@ -24,8 +24,9 @@ const UserDashboard = (props) => {
   useEffect(()=>{
       dispatch(fetchBudgets());
   },[]);
-console.log(user.displayName, 'what are props');
+
   let userName = user.displayName;
+  
   return (<div className='dashboard__wrapper' >
       <h1 style={{color: '#fff'}}> <DashboardIcon style={{fontSize: 36, color: '#f25e7f', position: 'relative', top: 5}} /> Dashboard. {userName ? `Hi, ${userName}`: null} </h1>
       <p style={{color: '#fff'}}>  Inspect, Create, Amend, Delete your budgets. </p>

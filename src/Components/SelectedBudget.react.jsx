@@ -16,10 +16,12 @@ import TitleIcon from '@material-ui/icons/Title';
 import EventAvailableIcon from '@material-ui/icons/EventAvailable';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import MoneyOffOutlinedIcon from '@material-ui/icons/MoneyOffOutlined';
+import MyAccount from './MyAccount.react';
 
 export default function SelectedBudget(props) {
 
   const [checked, setChecked] = React.useState(true);
+  let [maOpen, setMaOpen] = React.useState(null);
 
   let sb = props?.selectedBudgetFromStore ? props.selectedBudgetFromStore : props.budgets[0];
   let loading = props.loading;
@@ -59,10 +61,11 @@ export default function SelectedBudget(props) {
           </Paper>
         </Grow>
         <div className='show__desktop__only' style={{ width: '100%' }}>
-          <Button size='large' variant="outlined" onClick={() => { }} className={'current__budget__button current__budget__button--expanded'} >
+          <Button size='large' variant="outlined" onClick={() => { setMaOpen(true)}} className={'current__budget__button current__budget__button--expanded'} >
             <EditIcon style={{ fontSize: 16, marginRight: 6, color: '#2196F3'}} /> Manage Account
                 </Button>
         </div>
+        {maOpen && <MyAccount maopen={maOpen} onClose={()=>{setMaOpen(false)}} />}
       </div>}
       {loading && <Loader />}
     </>

@@ -3,26 +3,27 @@ import { Container, Button, Paper, TextField } from '@material-ui/core';
 import Loader from './Loader';
 import moment from 'moment';
 import AddIcon from '@material-ui/icons/Add';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 //import DeleteIcon from '@material-ui/icons/Delete';
 import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
 import FormatListNumberedOutlinedIcon from '@material-ui/icons/FormatListNumberedOutlined';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import EditIcon from '@material-ui/icons/Edit';
 import Drawer from '@material-ui/core/Drawer';
-import {selectedBudget} from '../actions/budgets';
+import { selectedBudget } from '../actions/budgets';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Currency from './Currency';
+import MyAccount from './MyAccount.react';
 
 function BuddgetForm(props) {
 
   var [formState, setFormState] = React.useState({ currency: 'uk', title: ' ', description: ' ', total: '0' });
 
   function addBudget() {
-    console.log('added budget', formState);
+    
     let objTS = { ...formState };
 
     objTS.createddate = new Date();
@@ -101,7 +102,7 @@ function BuddgetForm(props) {
 
           <div className='add__budget__fieldswrapper'>
             <FormControl variant="outlined" className='add__budget__select' >
-            <InputLabel id="demo-simple-select-outlined-label">Currency</InputLabel>
+              <InputLabel id="demo-simple-select-outlined-label">Currency</InputLabel>
               <Select
                 labelId="currency"
                 id="currency"
@@ -141,28 +142,30 @@ function BuddgetForm(props) {
   </>);
 }
 
+
 export default function BudgetsList(props) {
   let [showForm, setShowForm] = React.useState(false);
+  var [maopen, setMaOpen] = React.useState(false);
 
   let budgets = [];
   if (props.budgets) {
     budgets = props.budgets.map((el, i) => {
 
       return (<div key={i + 1} style={{ display: 'flex', flexFlow: 'row nowrap' }}>
-        <Link style={{textDecoration: 'none', width: '100%'}} to={'/managebudget'} onClick={()=>{props.dispatch(selectedBudget(el));}}>
-        <Button size='large' variant="outlined" className={'current__budget__button current__budget__button--expanded defaultblue'}>
-          <div>
-            <div style={{ display: 'flex'}}>
-              <span style={{ color: '#555', marginRight: 8 }}>{`${i + 1}.`}</span>
-              <span style={{ color: '#2196F3', textTransform: 'capitalize' }} >{`${el.title}`}</span>
+        <Link style={{ textDecoration: 'none', width: '100%' }} to={'/managebudget'} onClick={() => { props.dispatch(selectedBudget(el)); }}>
+          <Button size='large' variant="outlined" className={'current__budget__button current__budget__button--expanded defaultblue'}>
+            <div>
+              <div style={{ display: 'flex' }}>
+                <span style={{ color: '#555', marginRight: 8 }}>{`${i + 1}.`}</span>
+                <span style={{ color: '#2196F3', textTransform: 'capitalize' }} >{`${el.title}`}</span>
+              </div>
+              <div style={{ color: '#555', fontSize: 12, textTransform: 'capitalize', display: 'flex', justifyContent: 'flex-start' }} >
+                <div style={{ display: 'inline-flex', marginLeft: 0, flexFlow: 'row wrap' }}> <span>Created:</span> <span style={{ color: '#2196F3', marginRight: 2, marginLeft: 4, display: 'inline' }}>{moment.unix(el.createddate.seconds).format("DD MMM YY")} </span> </div>
+                <div style={{ display: 'inline', marginLeft: 4 }}> Entries:<span style={{ color: '#2196F3', marginRight: 2 }}> {el.entries.length} </span> </div>
+              </div>
+              <div style={{ display: 'block', textAlign: 'left', marginRight: 'auto', color: '#555' }} > Available: <span style={{ color: '#2196F3', marginRight: 2 }}> {Number(Number(el.total) - Math.abs(el.progress)).toFixed(2)}{<Currency currency={el.currency} />}  </span> </div>
             </div>
-            <div style={{ color: '#555', fontSize: 12, textTransform: 'capitalize', display: 'flex', justifyContent: 'flex-start' }} >
-              <div style={{ display: 'inline-flex', marginLeft: 0 , flexFlow: 'row wrap'}}> <span>Created:</span> <span style={{ color: '#2196F3', marginRight: 2, marginLeft: 4 , display: 'inline'}}>{moment.unix(el.createddate.seconds).format("DD MMM YY")} </span> </div>
-              <div style={{ display: 'inline', marginLeft: 4 }}> Entries:<span style={{ color: '#2196F3', marginRight: 2 }}> {el.entries.length} </span> </div>
-            </div>
-            <div style={{ display: 'block', textAlign: 'left', marginRight: 'auto', color: '#555' }} > Available: <span style={{ color: '#2196F3', marginRight: 2 }}> {Number(Number(el.total) - Math.abs(el.progress)).toFixed(2)}{<Currency currency={el.currency} />}  </span> </div>
-          </div>
-        </Button>
+          </Button>
         </Link>
         <DeleteForeverOutlinedIcon onClick={() => { props.removeBudgetAction(el.docid) }} style={{ cursor: 'pointer', alignSelf: 'center', color: 'rgba(242, 94, 127 , 0.8)', marginLeft: 16, marginTop: 16 }} />
       </div>);
@@ -171,7 +174,8 @@ export default function BudgetsList(props) {
   }
 
 
-  return (<div className='budgetlist__wrapper' style={{ display: 'flex', flexFlow: 'column' }}>
+  return (<>
+  <div className='budgetlist__wrapper' style={{ display: 'flex', flexFlow: 'column' }}>
     <div className='show__mobile__only' style={{ width: '100%', marginBottom: 32 }}>
       <Button size='large' variant="outlined"
         onClick={() => { if (budgets && budgets.length < 10) { setShowForm(!showForm); } }}
@@ -209,10 +213,11 @@ export default function BudgetsList(props) {
     </div>
     <BuddgetForm addBudgetAction={props.addBudgetAction} open={showForm} close={() => { setShowForm(false) }} />
     <div className='show__mobile__only' style={{ width: '100%', marginTop: 16 }}>
-          <Button size='large' variant="outlined" onClick={() => { }} className={'current__budget__button current__budget__button--expanded'} >
-            <EditIcon style={{ fontSize: 16, marginRight: 6, color: '#2196F3'}} /> Manage Account
+      <Button size='large' variant="outlined" onClick={() => {console.log(maopen); setMaOpen(true);}} className={'current__budget__button current__budget__button--expanded'} >
+        <EditIcon style={{ fontSize: 16, marginRight: 6, color: '#2196F3' }} /> Manage Account
                 </Button>
     </div>
+    <MyAccount maopen={maopen} onClose={()=>setMaOpen(false)} />
   </div>
-  );
+  </>);
 };

@@ -39,7 +39,6 @@ function ManageBudget(props) {
 
   if(entries && entries.length > 0) {
     prepEntries = entries.map((el, key)=>{
-      console.log(el);
       return (<div  className='entry__item__cont'  key={key}>  
                             <div className='entry__item__deep'> <span className='show__desktop__only' style={{color: '#2196F3', display: 'inline'}}> {key+1}. </span>   Entry added: <span style={{ marginRight: 8, color: '#2196F3'}}>{moment.unix(el.created / 1000).format('Do MM YYYY hh:mm')}</span></div> 
                             <div className='entry__item__deep'>  Type: <span style={{ marginRight: 8, color: '#2196F3'}} >{el.type == 'add' ? 'Add' : 'Subtract' } </span> </div> 
@@ -86,7 +85,6 @@ function ManageBudget(props) {
     return true;
   }
 
-  console.log(sb, 'what is sb');
   return (
     <>
       <h1 style={{ color: '#fff' }}> <DataUsageIcon style={{ fontSize: 36, color: '#f25e7f', position: 'relative', top: 5 }} /> Manage {sb?.title ? sb.title : 'budget'}.  </h1>

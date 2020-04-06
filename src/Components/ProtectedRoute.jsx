@@ -12,7 +12,7 @@ const ProtectedRoute = ({
 }) => {
   return (
   <Route {...rest} render={(props) => isVerifying ?
-   (<div> Loading ... </div>) : isAuthenticated ?
+   (<div style={{color: '#fff', margin: 16}}> Loading ... </div>) : isAuthenticated ?
     (<Component {...props}/>) : (<Redirect to={{pathname: "/login", state: {from: props.location}}} />)} >
   </Route>
   );

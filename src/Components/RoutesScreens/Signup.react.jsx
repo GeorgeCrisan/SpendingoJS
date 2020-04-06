@@ -72,7 +72,6 @@ const Signup = (props) => {
     }
     setDnerror(false);
     const { dispatch } = props;
-    console.log(email, password, name);
     dispatch(createUser( email, password, name));
   }
 

@@ -1,4 +1,4 @@
-import { myFirebase } from "../firebase/firebase";
+import { myFirebase , db} from "../firebase/firebase";
 
 //Constants
 
@@ -23,6 +23,9 @@ export const UPDATE_USER_ERROR = "UPDATE_USER_ERROR";
 export const REQUEST_PASS_SUCCESS = 'REQUEST_PASS_SUCCESS';
 export const REQUEST_PASS_FAIL = 'REQUEST_PASS_FAIL';
 export const REQUEST_PASS_START = 'REQUEST_PASS_START';
+
+export const DELETE_ACCOUNT_SUCCESS = 'DELETE_ACCOUNT_SUCCESS';
+export const DELETE_ACCOUNT_FAIL = 'DELETE_ACCOUNT_FAIL';
 
 //Raw Actions
 const updateUser = (user) => {
@@ -127,7 +130,37 @@ const passRequestFail = (err) => {
   };
 };
 
+export const deleteSuccess = () => {
+    return {
+      type: DELETE_ACCOUNT_SUCCESS
+    }
+}
+
+export const deleteFail= (error) => {
+  return {
+    type: DELETE_ACCOUNT_FAIL,
+    error: error
+  }
+}
+
 //Thunks
+
+export const deleteAccount = () => dispatch => {
+  console.log('deleting user');
+  let user = myFirebase.auth().currentUser;
+  user.delete().then(function() {
+    // User deleted.
+    // do displatch for user deleted
+    dispatch(deleteSuccess());
+    console.log('deleting user done ');
+  }).catch(function(error) {
+    // An error happened.
+    // do displatch for error
+    dispatch(deleteFail(error));
+  });
+}
+
+
 export const passwordReset = (email) => dispatch => {
   dispatch(passRequestStart());
   myFirebase

@@ -1,0 +1,108 @@
+import React, { useEffect, useState } from 'react';
+import { Container, Button, Paper, TextField } from '@material-ui/core';
+import moment from 'moment';
+import { passwordReset, deleteAccount } from "../actions";
+import Drawer from '@material-ui/core/Drawer';
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
+
+function validateEmail(email) {
+  var re = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+  return re.test(email);
+}
+
+function MyAccount(props) {
+  const [resetEmail, setResetEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const [emailNotValid, setEmailNotValid] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  let {user, stateAuth, dispatch} = props;
+  const [deleteWarning, setDeleteWarning] = useState(false);
+
+  useEffect(()=>{
+    let accDeleted = stateAuth.accountDeleted;
+    console.log(accDeleted, 'from effect');
+  },[stateAuth]);
+
+  const deleteAccountLocal = () => {
+    if(!deleteWarning) {
+      setDeleteWarning(true);
+      return false;
+    } else {
+      setDeleteWarning(false);
+      // do dispatch delete data and account 
+      dispatch(deleteAccount());
+    }
+  }
+
+  const submitReset = () => {
+    if (validateEmail(resetEmail)) {
+      dispatch(passwordReset(resetEmail));
+      setEmailNotValid(false);
+      setShowSuccess(true);
+      setTimeout(() => {
+        setShowModal(false);
+      }, 4000);
+      return;
+    }
+
+    setEmailNotValid(true);
+  }
+  
+  let error = stateAuth.resetPassErr;
+  let delError = stateAuth.deleteAccountErr;
+  let accDeleted = stateAuth.accountDeleted;
+
+  console.log(accDeleted, 'what is it as default');
+  if(accDeleted) {
+    return (<Redirect to="/" />);
+  }
+  return (
+    <Drawer anchor={'top'} open={props.maopen} onClose={props.onClose}>
+      <Container component="main" maxWidth="md">
+        <h2 style={{ textAlign: 'center', color: '#2196F3', marginTop: 32 }} >
+
+  Manage Account {user ? `- ${user.displayName}` : 'null' }</h2>
+        <div style={{ display: 'flex', flexFlow: 'column' }}>
+
+          <div style={{ display: 'flex', flexFlow: 'row', alignContent: 'center', alignItems: 'center', justifyContent: 'center' }}>
+            <TextField
+              style={{width: 280, marginRight: 16}}
+              variant="outlined"
+              margin="normal"
+              id="reset password"
+              error={emailNotValid}
+              helperText={emailNotValid ? 'Email format is not valid' : ''}
+              label="Reset password via email"
+              name="email"
+              onChange={(evt) => {setResetEmail(evt.target.value)}}
+            />
+            <Button  
+              variant='outlined'
+              onClick={submitReset}
+              style={{color: 'blue', alignSelf: 'center'}}> Submit </Button>
+          </div>
+          <Button onClick={deleteAccountLocal} style={{margin: '16px auto', width: '100%'}} varian='outlined' className={'deleteaccount--expanded--danger'} > {deleteWarning ? 'Confirm' : 'Delete Account'}  </Button>
+          {deleteWarning && <div style={{color: 'red', fontSize: 14, textAlign: 'center' , margin: 16, width: '100%'}}> Are you sure? You will lose all the data. Click again to confirm.</div>}
+          {delError && delError.isError && delError.message  && <div style={{color: 'red', fontSize: 14, textAlign: 'center' , margin: 16, width: '100%'}} >{`${delError.message}`}</div>}
+          {error && error.isError && error.message && <div style={{color: 'red', fontSize: 14, textAlign: 'center' , margin: 16, width: '100%'}} >{`${error.message}`}</div>}
+          <Button disabled={false} style={{ marginTop: 16, marginBottom: 16 }} variant="outlined" size='large' color="primary" onClick={props.onClose} > Done </Button>
+        </div>
+        
+        
+      </Container>
+    </Drawer>);
+}
+
+function mapStateToProps(state) {
+  return {
+    isLoggingIn: state.auth.isLoggingIn,
+    loginError: state.auth.loginError,
+    isAuthenticated: state.auth.isAuthenticated,
+    user: state.auth.user,
+    stateAuth: state.auth
+  }
+}
+
+export default connect(mapStateToProps)(MyAccount);

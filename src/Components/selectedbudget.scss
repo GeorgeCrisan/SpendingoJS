@@ -92,9 +92,18 @@
   &--expanded.success {
     border: 2px solid #4BB543 !important;
   }
+
   &--expanded.defaultblue {
     border: 2px solid #2196F3 !important;
     justify-content: flex-start;
+  }
+}
+
+.deleteaccount--expanded--danger {
+  border: 2px solid red !important;
+
+  .MuiButton-label {
+    color: red !important;
   }
 }
 
