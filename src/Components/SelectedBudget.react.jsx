@@ -52,7 +52,7 @@ export default function SelectedBudget(props) {
                   </Link>
                 </div>
               </div>}
-              {!sb && <div style={{display: 'flex', flexFlow: 'column',  alignItems: 'center', justifyContent: 'center' }}>
+              {!sb && <div onClick={()=>{props.setShowForm(!props.showForm);}} style={{display: 'flex', flexFlow: 'column',  alignItems: 'center', cursor: 'pointer', justifyContent: 'center' }}>
                 <h2 style={{alignSelf: 'center', paddingTop: 16, borderBottom: 'none', color: '#2196F3' }}> <NotesIcon style={{ fontSize: 40, position: 'relative', top: 12, right: 4 }} />
                   Please create a budget. Soon as budget is created, relevant data is displayed here.
                 </h2>

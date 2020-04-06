@@ -96,7 +96,7 @@ const Login = (props) => {
     return <Redirect to="/userhome" />;
   }
 
-  return (<Container component="main" style={{marginBottom: 100}} maxWidth="xs">
+  return (<Container component="main" style={{marginBottom: 100, paddingLeft: 0, paddingRight: 0}} maxWidth="xs">
     <Paper className={classes.paper}>
       <Avatar className={classes.avatar}>
         <VpnKeyOutlinedIcon />
