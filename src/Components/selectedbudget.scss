@@ -135,6 +135,27 @@
   }
 }
 
+.mobile__fixed__add {
+  @include for-phone-only {
+    position: fixed;
+    bottom: 0;
+    padding-bottom: 16px;
+    left: 0;
+    z-index: 9999;
+    background: linear-gradient(45deg, #2196F3 30%, #21CBF3 90%) !important;
+    margin-bottom: 0px !important;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    button {
+      width: 220px;
+      svg {
+        color: #fff !important;
+      }
+    }
+  }
+}
+
 .show__mobile__only {
   display: none;
   @include for-phone-only {

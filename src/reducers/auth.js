@@ -73,7 +73,9 @@ export default (state = {
         isLoggingIn: false,
         isAuthenticated: true,
         user: action.payload,
-        accountDeleted: false
+        accountDeleted: false,
+        resetPassErr: {isError: false, message: '', statusCode: ''},
+        deleteAccountErr: {isError: false, message: '', statusCode: ''},
       };
 
     case LOGIN_FAILURE:

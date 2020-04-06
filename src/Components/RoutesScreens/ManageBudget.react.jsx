@@ -28,7 +28,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 function ManageBudget(props) {
 
   const [checked, setChecked] = React.useState(true);
-  const [formState, setFormState] = React.useState({type: 'add', value: '0', error: false, errorMsg: ''});
+  const [formState, setFormState] = React.useState({type: 'add', description: '', value: '0', error: false, errorMsg: ''});
 
   let sb = props.selectedBudget;
   let loading = props.loading;
@@ -51,12 +51,18 @@ function ManageBudget(props) {
     setFormState({...formState, [vt]: v});
   }
 
+  function isValidLength(type, limit) {
+    let length = formState[type].length;
+    if (length > 0 && length < limit) {
+      return false;
+    }
+    return true;
+  }
+
 
   function onAdd() {
-     //!!!!!!!!!!! This mutates the state
-     //IS against redux priciples so be aware
 
-     let objts = sb; //Object.create(sb, {});
+     let objts = sb;
 
      objts.updateddate = new Date();
 
@@ -64,11 +70,9 @@ function ManageBudget(props) {
  
     if(formState.type === 'add') {
       objts.progress = Number(objts.progress) + Number(formState.value);
-     } else {
-      objts.progress = Number(objts.progress) - Number(formState.value);
      }
 
-     objts.entries = sb.entries.concat([{created: moment().format('x'), type: formState.type, value: Number(formState.value).toFixed(2) }]);
+     objts.entries = sb.entries.concat([{created: moment().format('x'), type: formState.type, value: Number(formState.value).toFixed(2), description: formState.description }]);
 
      dispatch(addEntry(objts));
 
@@ -91,7 +95,7 @@ function ManageBudget(props) {
       <p style={{ color: '#fff' }}>  Inspect, Amend, Delete your selected budget. </p>
       {false && <div className='show__desktop__only' style={{ width: '100%', textAlign: 'center', height: 50, marginTop: 60, marginBottom: 0 }}> Some of my comercials banners </div>}
 
-      {!sb && <div style={{ display: 'flex', flexFlow: 'column', height: 200, width: '100%', justifyContent: 'center', alignItems: 'center ' }}>
+      {!sb && <div style={{ display: 'flex', marginBottom: 100, flexFlow: 'column', height: 200, width: '100%', justifyContent: 'center', alignItems: 'center ' }}>
         <h2 style={{ color: '#fff' }}> Nothing here? You must be lost ...   </h2>
         <Link style={{ textDecoration: 'none', cursor: 'pointer' }} to={'/userhome'}>
           <Button size='large' variant="outlined" className={'current__budget__button current__budget__button--back'} >
@@ -108,9 +112,9 @@ function ManageBudget(props) {
                   <CalendarViewDayOutlinedIcon style={{ marginRight: 8, color: '#2196f3', position: 'relative', top: 4 }} />
                   {'Manage budget entries'}
                 </h2>
+                <p> <AttachMoneyIcon style={{ color: 'green' }} /> Budget value: <span>{Number(sb.total).toFixed(2)}</span><Currency currency={sb.currency} /> </p>
                 <p> <TitleIcon />  Budget title: <span> {sb.title}</span>  </p>
                 <p> <DescriptionOutlinedIcon /> Description: <span>{sb.description}</span>  </p>
-                <p> <AttachMoneyIcon style={{ color: 'green' }} /> Total funds: <span>{Number(sb.total).toFixed(2)}</span><Currency currency={sb.currency} /> </p>
                 <p> <MoneyOffOutlinedIcon /> Total spent: <span>{Math.abs(sb.progress).toFixed(2)}<Currency currency={sb.currency} /></span> </p>
                 <p> <AttachMoneyIcon style={{ color: 'green' }} /> Available to spend: <span>{`${Number(Number(sb.total).toFixed(2) - Math.abs(sb.progress).toFixed(2)).toFixed(2)}`}<Currency currency={sb.currency} /></span> </p>
                 <p> <EventAvailableIcon /> Created: <span>{moment.unix(sb.createddate.seconds).format("DD MMM YYYY")}</span></p>
@@ -130,7 +134,18 @@ function ManageBudget(props) {
                 shrink: true,
               }}
             />
-          <FormControl variant="outlined" className='add__entry__type'>
+            <TextField
+            variant="outlined"
+            margin="normal"
+            id="description"
+            error={isValidLength('description', 100)}
+            helperText={'Max 100 characters.'}
+            label="Short description"
+            name="Short description"
+            onChange={(evt) => onChange('description', evt.target.value)}
+          />
+
+          {false && <FormControl variant="outlined" className='add__entry__type'>
             <InputLabel id="demo-simple-select-outlined-label">Add/Subtract</InputLabel>
               <Select
                 labelId="AddSubtract<"
@@ -142,7 +157,7 @@ function ManageBudget(props) {
                 <MenuItem value={'add'}>  Add </MenuItem>
                 <MenuItem value={'remove'}> Subtract </MenuItem>
               </Select>
-            </FormControl>
+            </FormControl>}
                   <Button size='large' variant="outlined" disabled={isValidTotal()} 
                     onClick={onAdd}
                    >

@@ -13,24 +13,17 @@
   .add__entry__value {
     width: 100%;
     @include for-tablet-portrait-up {
-      width: 46%;
-    }
-  }
-
-  .add__entry__type {
-    margin-top: 16px;
-    width: 100%;
-    @include for-tablet-portrait-up {
       width: 28%;
     }
   }
+
 
   button {
     margin-top: 16px;
     height: 56px;
     width: 100%;
     @include for-tablet-portrait-up {
-      width: 16%;
+      width: 10%;
     }
   }
 }

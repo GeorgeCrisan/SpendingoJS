@@ -37,9 +37,9 @@ export default function SelectedBudget(props) {
                    <CalendarViewDayOutlinedIcon style={{marginRight: 8, color: '#2196f3', position: 'relative', top: 4}} />
                    {!props.selectedBudgetFromStore ? 'Latest Budget' : 'Selected Budget'}
                 </h2>
+                <p> <AttachMoneyIcon style={{color: 'green'}} /> Budget Value: <span>{Number(sb.total).toFixed(2)}</span><Currency currency={sb.currency} /> </p>
                 <p> <TitleIcon />  Budget title: <span> {sb.title}</span>  </p>
                 <p> <DescriptionOutlinedIcon /> Description: <span>{sb.description}</span>  </p>
-                <p> <AttachMoneyIcon style={{color: 'green'}} /> Total funds: <span>{Number(sb.total).toFixed(2)}</span><Currency currency={sb.currency} /> </p>
                 <p> <MoneyOffOutlinedIcon /> Total spent: <span>{Math.abs(sb.progress).toFixed(2)}<Currency currency={sb.currency} /></span> </p>
                 <p> <AttachMoneyIcon style={{color: 'green'}} /> Available to spend: <span>{`${Number(Number(sb.total) - Math.abs(sb.progress).toFixed(2)).toFixed(2)}`}<Currency currency={sb.currency} /></span> </p>
                 {false && <p> <EventAvailableIcon /> Created: <span>{moment.unix(sb.createddate.seconds).format("DD MMM YYYY")}</span> </p>}

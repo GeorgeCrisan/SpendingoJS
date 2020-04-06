@@ -78,7 +78,7 @@ function BuddgetForm(props) {
         <h2 style={{ textAlign: 'center', color: '#2196F3', marginTop: 32 }} >
           <FormatListNumberedOutlinedIcon style={{ position: 'relative', top: 4, marginRight: 4 }} />
         New budget form </h2>
-        <div style={{ display: 'flex', flexFlow: 'column' }}>
+        <div style={{ display: 'flex', flexFlow: 'column', marginBottom: 78 }}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -135,7 +135,7 @@ function BuddgetForm(props) {
 
           <span> <InfoOutlinedIcon style={{ color: '#2196F3', position: 'relative ', top: 6 }} /> All the fields have to be filled in order to be able to submit the form.  </span>
           <Button style={{ marginTop: 16 }} variant="outlined" size='large' onClick={() => props.close(false)} > Cancel </Button>
-          <Button disabled={isValid() ? false : true} style={{ marginTop: 16, marginBottom: 16 }} variant="outlined" size='large' color="primary" onClick={addBudget} > Add </Button>
+          <Button disabled={isValid() ? false : true} style={{ marginTop: 16, marginBottom: 64 }} variant="outlined" size='large' color="primary" onClick={addBudget} > Add </Button>
         </div>
       </Container>
     </Drawer>
@@ -176,7 +176,7 @@ export default function BudgetsList(props) {
 
   return (<>
   <div className='budgetlist__wrapper' style={{ display: 'flex', flexFlow: 'column' }}>
-    <div className='show__mobile__only' style={{ width: '100%', marginBottom: 32 }}>
+    <div className='show__mobile__only mobile__fixed__add' style={{ width: '100%', marginBottom: 32 }}>
       <Button size='large' variant="outlined"
         onClick={() => { if (budgets && budgets.length < 10) { setShowForm(!showForm); } }}
         className={'current__budget__button current__budget__button--expanded'} >
@@ -212,7 +212,7 @@ export default function BudgetsList(props) {
       </Button>
     </div>
     <BuddgetForm addBudgetAction={props.addBudgetAction} open={showForm} close={() => { setShowForm(false) }} />
-    <div className='show__mobile__only' style={{ width: '100%', marginTop: 16 }}>
+    <div className='show__mobile__only' style={{ width: '100%', marginTop: 16, marginBottom: 60 }}>
       <Button size='large' variant="outlined" onClick={() => {console.log(maopen); setMaOpen(true);}} className={'current__budget__button current__budget__button--expanded'} >
         <EditIcon style={{ fontSize: 16, marginRight: 6, color: '#2196F3' }} /> Manage Account
                 </Button>

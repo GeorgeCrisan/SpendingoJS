@@ -1,4 +1,4 @@
-import { myFirebase , db} from "../firebase/firebase";
+import { myFirebase, db } from "../firebase/firebase";
 
 //Constants
 
@@ -131,12 +131,12 @@ const passRequestFail = (err) => {
 };
 
 export const deleteSuccess = () => {
-    return {
-      type: DELETE_ACCOUNT_SUCCESS
-    }
+  return {
+    type: DELETE_ACCOUNT_SUCCESS
+  }
 }
 
-export const deleteFail= (error) => {
+export const deleteFail = (error) => {
   return {
     type: DELETE_ACCOUNT_FAIL,
     error: error
@@ -145,33 +145,49 @@ export const deleteFail= (error) => {
 
 //Thunks
 
-export const deleteAccount = () => dispatch => {
+export const deleteAccount = (password) => dispatch => {
   console.log('deleting user');
   let user = myFirebase.auth().currentUser;
-  user.delete().then(function() {
-    // User deleted.
-    // do displatch for user deleted
-    dispatch(deleteSuccess());
-    console.log('deleting user done ');
-  }).catch(function(error) {
-    // An error happened.
-    // do displatch for error
-    dispatch(deleteFail(error));
-  });
+  console.log(user, 'what is user');
+
+  myFirebase
+    .auth()
+    .signInWithEmailAndPassword(user.email, password).then((done)=>{
+      db.collection('budgets')
+      .where('ownerid', "==", myFirebase.auth().currentUser.uid)
+      .orderBy('updateddate', 'desc')
+      .get().then((data) => {
+        let batch = db.batch();
+
+        data.forEach((doc) => {
+          batch.delete(doc.ref);
+        });
+        return batch.commit();
+      }).then(() => {
+        return user.delete();
+      })
+      .then(function () {
+        dispatch(deleteSuccess());
+      }).catch((error)=>{
+        dispatch(deleteFail(error));
+      });
+    }).catch((error)=>{
+      dispatch(deleteFail(error));
+    });
 }
 
 
 export const passwordReset = (email) => dispatch => {
   dispatch(passRequestStart());
   myFirebase
-  .auth()
-  .sendPasswordResetEmail(email)
-  .then((data)=>{
-    dispatch(passRequestSuccess(data));
-  })
-  .catch((err)=>{
-    dispatch(passRequestFail(err));
-  });
+    .auth()
+    .sendPasswordResetEmail(email)
+    .then((data) => {
+      dispatch(passRequestSuccess(data));
+    })
+    .catch((err) => {
+      dispatch(passRequestFail(err));
+    });
 };
 
 export const createUser = (email, password, displayName) => dispatch => {
@@ -181,21 +197,21 @@ export const createUser = (email, password, displayName) => dispatch => {
     .auth()
     .createUserWithEmailAndPassword(email, password)
     .then((data) => {
-      const {user} = data;
-      if(user) {
+      const { user } = data;
+      if (user) {
         user.sendEmailVerification();
 
         user.updateProfile({
           displayName: displayName
-        }).then((user)=>{
+        }).then((user) => {
           dispatch(updateUser(user));
-        }).catch((err2)=>{
+        }).catch((err2) => {
           dispatch(errorUpdateUser(err2));
         });
       }
       dispatch(successCreateUser(user));
     })
-    .catch((err)=>{
+    .catch((err) => {
       dispatch(errorCreateUser(err));
     });
 }
@@ -231,11 +247,11 @@ export const verifyAuth = () => dispatch => {
   dispatch(requestCheck());
 
   myFirebase
-  .auth()
-  .onAuthStateChanged(user => {
-    if(user !== null) {
+    .auth()
+    .onAuthStateChanged(user => {
+      if (user !== null) {
         dispatch(successLogin(user));
-    }
-    dispatch(successCheck());
-  })
+      }
+      dispatch(successCheck());
+    })
 };
