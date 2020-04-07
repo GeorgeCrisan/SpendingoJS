@@ -25,7 +25,12 @@ export default function SelectedBudget(props) {
 
   let sb = props?.selectedBudgetFromStore ? props.selectedBudgetFromStore : props.budgets[0];
   let loading = props.loading;
-
+  let available = 0;
+   
+  if(sb) {
+    available = Number(Number(sb.total).toFixed(2) - Math.abs(sb.progress).toFixed(2)).toFixed(2);
+  }
+   
   return (
     <>
       {!loading && <div className='current__budget__wrapper'>
@@ -41,7 +46,10 @@ export default function SelectedBudget(props) {
                 <p> <TitleIcon />  Budget title: <span> {sb.title}</span>  </p>
                 <p> <DescriptionOutlinedIcon /> Description: <span>{sb.description}</span>  </p>
                 <p> <MoneyOffOutlinedIcon /> Total spent: <span><Currency currency={sb.currency} /> {Math.abs(sb.progress).toFixed(2)}</span> </p>
-                <p> <AttachMoneyIcon style={{color: 'green'}} /> Available to spend:  <span><Currency currency={sb.currency} />{` ${Number(Number(sb.total) - Math.abs(sb.progress).toFixed(2)).toFixed(2)}`}</span> </p>
+                <p> <AttachMoneyIcon style={{color: 'green'}} /> Available to spend: 
+                  <span><Currency currency={sb.currency} />{` ${available}`}</span>
+                  {available < 0 && <span style={{color: 'red'}}> overspent </span>}
+                  </p>
                 {false && <p> <EventAvailableIcon /> Created: <span>{moment.unix(sb.createddate.seconds).format("DD MMM YYYY")}</span> </p>}
 
                 <div className='current__budget__button__wrapper'>

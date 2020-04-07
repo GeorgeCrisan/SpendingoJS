@@ -40,7 +40,7 @@ function ManageBudget(props) {
   if(entries && entries.length > 0) {
     prepEntries = entries.map((el, key)=>{
       return (<div  className='entry__item__cont'  key={key}>  
-                            <div className='entry__item__deep'>  {`${key + 1}. Entry added:`} <span style={{ marginRight: 8, color: '#2196F3'}}>{moment.unix(el.created / 1000).format('Do MM YYYY hh:mm')}</span></div> 
+                            <div className='entry__item__deep'>  {`${key + 1}. Added:`} <span style={{ marginRight: 8, color: '#2196F3'}}>{moment.unix(el.created / 1000).format('Do MM YYYY hh:mm')}</span></div> 
                             <div className='entry__item__deep'>  Description: <span style={{ marginRight: 8, color: '#2196F3', wordBreak: 'break-all'}} >{el.description} </span> </div> 
                             <div className='entry__item__deep'>  Value: <span style={{ marginRight: 8, color: '#2196F3'}}>  <Currency currency={sb.currency} /> {Number(el.value).toFixed(2)}</span> </div> 
               </div>);
@@ -89,6 +89,13 @@ function ManageBudget(props) {
     return true;
   }
 
+  let available = 0;
+   
+  if(sb) {
+    available = Number(Number(sb.total).toFixed(2) - Math.abs(sb.progress).toFixed(2)).toFixed(2);
+  }
+   
+
   return (
     <>
       <h1 style={{ color: '#fff' }}> <DataUsageIcon style={{ fontSize: 36, color: '#f25e7f', position: 'relative', top: 5 }} /> Manage {sb?.title ? sb.title : 'budget'}.  </h1>
@@ -116,7 +123,11 @@ function ManageBudget(props) {
                 <p> <TitleIcon />  Budget title: <span> {sb.title}</span>  </p>
                 <p> <DescriptionOutlinedIcon /> Description: <span>{sb.description}</span>  </p>
                 <p> <MoneyOffOutlinedIcon /> Total spent: <span>  <Currency currency={sb.currency} /> {Math.abs(sb.progress).toFixed(2)} </span> </p>
-                <p> <AttachMoneyIcon style={{ color: 'green' }} /> Available to spend: <span> <Currency currency={sb.currency} />{` ${Number(Number(sb.total).toFixed(2) - Math.abs(sb.progress).toFixed(2)).toFixed(2)}`}</span> </p>
+                <p> 
+                  <AttachMoneyIcon style={{ color: 'green' }} /> Available to spend:
+                  <span> <Currency currency={sb.currency} />{` ${available}`}</span>
+                  {available < 0 && <span style={{color: 'red'}}> overspent </span>}  
+                </p>
                 <p> <EventAvailableIcon /> Created: <span>{moment.unix(sb.createddate.seconds).format("DD MMM YYYY")}</span></p>
                 <div className='add__entry__wrapper'>
                 <TextField
@@ -125,8 +136,8 @@ function ManageBudget(props) {
               margin="normal"
               variant='outlined'
               error={isValidTotal()}
-              helperText={'The value must be a positive number.'}
-              label="The value of the entry"
+              helperText={'Positive number only.'}
+              label="Spending value"
               type="number"
               value={formState.value}
               onChange={(evt) => onChange('value', evt.target.value)}
