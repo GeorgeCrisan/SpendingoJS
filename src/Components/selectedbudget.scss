@@ -204,3 +204,11 @@
     height: 700px;
   }
 }
+
+.macc__button {
+  border: 2px solid #2196F3 !important;
+
+  .MuiButton-label {
+    color: #2196F3 !important;
+  }
+}

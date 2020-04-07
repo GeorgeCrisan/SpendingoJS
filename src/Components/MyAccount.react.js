@@ -77,7 +77,7 @@ function MyAccount(props) {
             <Button
               variant='outlined'
               onClick={submitReset}
-              style={{ color: 'blue', alignSelf: 'center' }}> Submit </Button>
+              className='macc__button'> Submit </Button>
           </div>
           {deleteWarning && <TextField
             variant="outlined"
@@ -93,7 +93,7 @@ function MyAccount(props) {
           {deleteWarning && <div style={{ color: 'red', fontSize: 14, textAlign: 'center', margin: 16, width: '100%' }}> Are you sure? You will lose all the data. Click again to confirm.</div>}
           {delError && delError.isError && delError.message && <div style={{ color: 'red', fontSize: 14, textAlign: 'center', margin: 16, width: '100%' }} >{`${delError.message}`}</div>}
           {error && error.isError && error.message && <div style={{ color: 'red', fontSize: 14, textAlign: 'center', margin: 16, width: '100%' }} >{`${error.message}`}</div>}
-          <Button disabled={false} style={{ marginTop: 16, marginBottom: 16 }} variant="outlined" size='large' color="primary" onClick={props.onClose} > Done </Button>
+          <Button disabled={false} style={{ marginTop: 16, marginBottom: 16 }} className={'macc__button'} variant="outlined" size='large' onClick={props.onClose} > Done </Button>
         </div>
 
 

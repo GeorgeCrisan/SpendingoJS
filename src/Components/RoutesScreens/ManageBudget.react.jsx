@@ -17,6 +17,7 @@ import EventAvailableIcon from '@material-ui/icons/EventAvailable';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import MoneyOffOutlinedIcon from '@material-ui/icons/MoneyOffOutlined';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import ArrowUpIcon from '@material-ui/icons/TrendingUp';
 import AddIcon from '@material-ui/icons/Add';
 import DataUsageIcon from '@material-ui/icons/DataUsage';
 import FormControl from '@material-ui/core/FormControl';
@@ -178,6 +179,9 @@ function ManageBudget(props) {
                 </div>
                 {prepEntries.length > 0 && prepEntries}
                 <div className='current__budget__button__wrapper'>
+                {false && <Button size='large' variant="outlined" style={{marginBottom: 32}} className={'current__budget__button'} >
+                      <ArrowUpIcon style={{ position: 'relative' }} /> Top up budget value
+                  </Button>}
                   <Link style={{ textDecoration: 'none' }} to={'/userhome'}>
                     <Button size='large' variant="outlined" style={{marginBottom: 32}} className={'current__budget__button'} >
                       <ArrowBackIcon style={{ position: 'relative' }} /> Back To Dashboard
