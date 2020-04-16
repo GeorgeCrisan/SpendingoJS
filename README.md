@@ -16,4 +16,4 @@ Made in my spare time  georgecrisan.com  jsnstop.com @ George Crisan
 - Implement email verify - done
 - Add a basic sticky footer - done 
 - Prepare budgets - done
-.... - done
+- Everything else .... - done
