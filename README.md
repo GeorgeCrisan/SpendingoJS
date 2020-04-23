@@ -14,6 +14,6 @@ Made in my spare time  georgecrisan.com  jsnstop.com @ George Crisan
 
 ### To do:
 - Implement email verify - done
-- Add a basic sticky footer
-- Prepare budgets
-- Make firebase config file available and move sensitive data to .env
+- Add a basic sticky footer - done 
+- Prepare budgets - done
+- Everything else .... - done
