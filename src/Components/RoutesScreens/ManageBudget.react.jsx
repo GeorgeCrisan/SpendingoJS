@@ -50,9 +50,13 @@ function ManageBudget(props) {
                             <div className='entry__item__deep'>  {`${key + 1}. Added:`} <span style={{ marginRight: 8, color: '#2196F3'}}>{moment.unix(el.created / 1000).format('Do MM YYYY hh:mm')}</span></div> 
                             <div className='entry__item__deep'>  Description: <span style={{ marginRight: 8, color: '#2196F3', wordBreak: 'break-all'}} >{el.description} </span> </div> 
                             <div className='entry__item__deep'>  Value: <span style={{ marginRight: 8, color: '#2196F3'}}>  <Currency currency={sb.currency} /> {Number(el.value).toFixed(2)}</span> </div> 
-                            <DeleteForeverOutlinedIcon 
+                            <div style={{display: 'flex', flexFlow: 'row nowrap'}}>
+                              <DeleteForeverOutlinedIcon 
                               onClick={() => { removeEntryAction(sb, el) }}
-                              style={{ cursor: 'pointer', alignSelf: 'center', color: 'rgba(242, 94, 127 , 0.8)', marginLeft: 16, marginRight: 16, marginTop: 4 }} />
+                              className="delete__icon"
+                              style={{ cursor: 'pointer', alignSelf: 'center', color: 'rgba(242, 94, 127 , 0.8)'}} />
+                              <span style={{color: 'rgba(242, 94, 127 , 0.8)', position: 'relative', top: 20}} className='show__mobile__only' >Remove</span>
+                            </div>
               </div>);
     });
   }
