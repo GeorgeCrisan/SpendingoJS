@@ -31,9 +31,9 @@ export default (state = {
   accountDeleted: false,
   user: {}
 }, action) => {
-  console.log('Action Type:', action.type );
+  //console.log('Action Type:', action.type );
   if(action?.error) {
-    console.log( 'Error:' ,(action?.error));
+    //console.log( 'Error:' ,(action?.error));
   } 
   switch (action.type) {
     case DELETE_ACCOUNT_FAIL:

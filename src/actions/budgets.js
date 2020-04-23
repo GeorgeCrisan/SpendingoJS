@@ -60,6 +60,8 @@ const lberror = (err) => {
 
 //Define Thunks
 
+
+
 export const addBudget = (fbdoc)=> dispatch => {
   fbdoc.ownerid = myFirebase.auth().currentUser.uid;
   fbdoc.owner = myFirebase.auth().currentUser.email;
@@ -71,7 +73,24 @@ export const addBudget = (fbdoc)=> dispatch => {
     });
  };
 
-
+ export const removeEntry = (budget, entryTR) => dispatch => {
+  dispatch(addestart());
+  let newBudget = {...budget};
+  newBudget.progress = budget.progress - Number(entryTR.value);
+  newBudget.entries = budget.entries.filter((el)=>{
+    return el.created !== entryTR.created;
+  });
+  
+  db.collection('budgets').doc(budget.docid).update({
+    progress: newBudget.progress,
+    entries:  newBudget.entries,
+    finalized: newBudget.finalized,
+  }).then((data)=>{
+    dispatch(addedone(newBudget));
+  }).catch((err)=>{
+    dispatch(addefail(err)); 
+  });
+ }
 
  export const addEntry = (budget) => dispatch => {
   dispatch(addestart());
@@ -80,7 +99,7 @@ export const addBudget = (fbdoc)=> dispatch => {
     entries: budget.entries,
     finalized: budget.finalized
   }).then((data)=>{
-    dispatch(addedone(data));
+    dispatch(addedone(budget));
   }).catch((err)=>{
     dispatch(addefail(err)); 
   });

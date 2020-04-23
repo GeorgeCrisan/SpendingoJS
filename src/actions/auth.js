@@ -146,9 +146,8 @@ export const deleteFail = (error) => {
 //Thunks
 
 export const deleteAccount = (password) => dispatch => {
-  console.log('deleting user');
+
   let user = myFirebase.auth().currentUser;
-  console.log(user, 'what is user');
 
   myFirebase
     .auth()

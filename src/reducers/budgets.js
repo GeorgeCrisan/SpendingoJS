@@ -5,6 +5,7 @@ import {
   SELECTED__BUDGET,
   LOGIN_SUCCESS,
   LOGOUT_SUCCESS,
+  ADDENTRY__DONE,
   DELETE_ACCOUNT_SUCCESS,
 } from "../actions/";
 
@@ -13,7 +14,7 @@ export default (state = {
   budgets: [],
   loading: false
 }, action) => {
-  console.log('Action Type:', action.type);
+  //console.log('Action Type:', action.type, 'Then:', action.payload);
   switch (action.type) {
     case LOAD__BUDGET__START:
       return {
@@ -36,10 +37,12 @@ export default (state = {
         };
 
     case LOAD__BUDGET__SUCCESS:
+      console.log(action.payload, 'what now');
       return {
         ...state,
         budgets: action.payload,
         error: { isError: false, message: "", statusCode: "" },
+        //selectedBudget: action.payload && action.payload.length > 0 ? action.payload[0] : false,
         loading: false
       };
 
@@ -57,6 +60,23 @@ export default (state = {
         ...state,
         selectedBudget: action.payload
       }
+
+    case ADDENTRY__DONE: {
+      
+      let oldState = {...state};
+      let budgets = oldState.budgets.map((el)=>{
+        if(el.docid === action.payload.docid) {
+          return action.payload;
+        }
+        return el;
+      });
+
+      return {
+        ...state,
+        budgets: budgets,
+        selectedBudget: action.payload
+      }
+    }
 
 
     default:

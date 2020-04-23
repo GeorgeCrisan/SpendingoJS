@@ -4,12 +4,10 @@ import Loader from './Loader';
 import moment from 'moment';
 import AddIcon from '@material-ui/icons/Add';
 import { Link } from 'react-router-dom';
-//import DeleteIcon from '@material-ui/icons/Delete';
 import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
 import FormatListNumberedOutlinedIcon from '@material-ui/icons/FormatListNumberedOutlined';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import EditIcon from '@material-ui/icons/Edit';
-import Drawer from '@material-ui/core/Drawer';
 import { selectedBudget } from '../actions/budgets';
 import Currency from './Currency';
 import MyAccount from './MyAccount.react';
@@ -30,11 +28,11 @@ export default function BudgetsList(props) {
                 <span style={{ color: '#555', marginRight: 8 }}>{`${i + 1}.`}</span>
                 <span style={{ color: '#2196F3', textTransform: 'capitalize' }} >{`${el.title}`}</span>
               </div>
-              <div style={{ color: '#555', fontSize: 12, textTransform: 'capitalize', display: 'flex', justifyContent: 'flex-start' }} >
+              <div style={{ color: '#555', fontSize: 14, textTransform: 'capitalize', display: 'flex', justifyContent: 'flex-start' }} >
                 <div style={{ display: 'inline-flex', marginLeft: 0, flexFlow: 'row wrap' }}> <span>Created:</span> <span style={{ color: '#2196F3', marginRight: 2, marginLeft: 4, display: 'inline' }}>{moment.unix(el.createddate.seconds).format("DD MMM YY")} </span> </div>
                 <div style={{ display: 'inline', marginLeft: 4 }}> Entries:<span style={{ color: '#2196F3', marginRight: 2 }}> {el.entries.length} </span> </div>
               </div>
-              <div style={{ display: 'block', textAlign: 'left', marginRight: 'auto', color: '#555' }} > Available: <span style={{ color: '#2196F3', marginRight: 2 }}> {Number(Number(el.total) - Math.abs(el.progress)).toFixed(2)}{<Currency currency={el.currency} />}  </span> </div>
+              <div style={{ display: 'block', textAlign: 'left', marginRight: 'auto', color: '#555', fontSize: 14 }} > Available: <span style={{ color: '#2196F3'}}> <Currency currency={el.currency} />{` ${Number(Number(el.total) - Math.abs(el.progress)).toFixed(2)}`} </span> </div>
             </div>
           </Button>
         </Link>

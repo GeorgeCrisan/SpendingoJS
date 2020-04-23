@@ -1,5 +1,6 @@
 import './managebudget.scss';
 import React, { useState, useEffect } from 'react';
+import { removeEntry } from '../../actions';
 import Paper from '@material-ui/core/Paper';
 import Grow from '@material-ui/core/Grow';
 import { Container, Button, TextField } from '@material-ui/core';
@@ -11,6 +12,7 @@ import { Link } from 'react-router-dom';
 
 import { addEntry } from '../../actions/budgets';
 import CalendarViewDayOutlinedIcon from '@material-ui/icons/CalendarViewDayOutlined';
+import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
 import DescriptionOutlinedIcon from '@material-ui/icons/DescriptionOutlined';
 import TitleIcon from '@material-ui/icons/Title';
 import EventAvailableIcon from '@material-ui/icons/EventAvailable';
@@ -36,6 +38,10 @@ function ManageBudget(props) {
   let {dispatch} = props;
   let entries = sb?.entries;
 
+  function removeEntryAction(fbobj, entryTR) {
+    dispatch(removeEntry(fbobj, entryTR));
+  }
+
   let prepEntries = [];
 
   if(entries && entries.length > 0) {
@@ -44,6 +50,9 @@ function ManageBudget(props) {
                             <div className='entry__item__deep'>  {`${key + 1}. Added:`} <span style={{ marginRight: 8, color: '#2196F3'}}>{moment.unix(el.created / 1000).format('Do MM YYYY hh:mm')}</span></div> 
                             <div className='entry__item__deep'>  Description: <span style={{ marginRight: 8, color: '#2196F3', wordBreak: 'break-all'}} >{el.description} </span> </div> 
                             <div className='entry__item__deep'>  Value: <span style={{ marginRight: 8, color: '#2196F3'}}>  <Currency currency={sb.currency} /> {Number(el.value).toFixed(2)}</span> </div> 
+                            <DeleteForeverOutlinedIcon 
+                              onClick={() => { removeEntryAction(sb, el) }}
+                              style={{ cursor: 'pointer', alignSelf: 'center', color: 'rgba(242, 94, 127 , 0.8)', marginLeft: 16, marginRight: 16, marginTop: 4 }} />
               </div>);
     });
   }

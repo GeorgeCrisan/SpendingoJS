@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react';
-import {fetchBudgets, addBudget, removeBudget} from '../../actions';
+import React, { useEffect } from 'react';
+import { fetchBudgets, addBudget, removeBudget, removeEntry } from '../../actions';
 import './userdashboard.scss';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -22,7 +22,7 @@ function BuddgetForm(props) {
   var [formState, setFormState] = React.useState({ currency: 'uk', title: ' ', description: ' ', total: '0' });
 
   function addBudget() {
-    
+
     let objTS = { ...formState };
 
     objTS.createddate = new Date();
@@ -133,8 +133,11 @@ function BuddgetForm(props) {
           </div>
 
           <span> <InfoOutlinedIcon style={{ color: '#2196F3', position: 'relative ', top: 6 }} /> All the fields have to be filled in order to be able to submit the form.  </span>
-          <Button style={{ marginTop: 16 }} variant="outlined" size='large' onClick={() => props.close(false)} > Cancel </Button>
-          <Button disabled={isValid() ? false : true} style={{ marginTop: 16, marginBottom: 64 }} variant="outlined" size='large' color="primary" onClick={addBudget} > Add </Button>
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Button style={{ margin: 16, width: 150 }} variant="outlined" size='large' onClick={() => props.close(false)} > Cancel </Button>
+            <Button disabled={isValid() ? false : true} style={{ margin: 16, width: 150  }} variant="outlined" size='large' color="primary" onClick={addBudget} > Add </Button>
+            
+          </div>
         </div>
       </Container>
     </Drawer>
@@ -142,7 +145,7 @@ function BuddgetForm(props) {
 }
 
 const UserDashboard = (props) => {
-  const {dispatch, user} = props;
+  const { dispatch, user } = props;
   let [showForm, setShowForm] = React.useState(false);
 
   function removeBudgetAction(docid) {
@@ -153,44 +156,44 @@ const UserDashboard = (props) => {
     dispatch(addBudget(fbobj));
   }
 
-  useEffect(()=>{
-      dispatch(fetchBudgets());
-  },[]);
+  useEffect(() => {
+    dispatch(fetchBudgets());
+  }, []);
 
   let userName = user.displayName;
-  
+
   return (<div className='dashboard__wrapper' >
-      <h1 style={{color: '#fff'}}> <DashboardIcon style={{fontSize: 36, color: '#f25e7f', position: 'relative', top: 5}} /> Dashboard. {userName ? `Hi, ${userName}`: null} </h1>
-      <p style={{color: '#fff'}}>  Inspect, Create, Amend, Delete your budgets. </p>
-      { false && <div className='show__desktop__only' style={{ width: '100%', textAlign: 'center', height: 50, marginTop: 60, marginBottom: 30 }}> Some of my comercials banners </div>}
-      <div className='dashboard__content'>
-        
-        <SelectedBudget 
+    <h1 style={{ color: '#fff' }}> <DashboardIcon style={{ fontSize: 36, color: '#f25e7f', position: 'relative', top: 5 }} /> Dashboard. {userName ? `Hi, ${userName}` : null} </h1>
+    <p style={{ color: '#fff' }}>  Inspect, Create, Amend, Delete your budgets. </p>
+    {false && <div className='show__desktop__only' style={{ width: '100%', textAlign: 'center', height: 50, marginTop: 60, marginBottom: 30 }}> Some of my comercials banners </div>}
+    <div className='dashboard__content'>
+
+      <SelectedBudget
         dispatch={dispatch}
         loading={props.loading}
         budgets={props.budgets}
         selectedBudgetFromStore={props.selectedBudget}
         showForm={showForm}
         setShowForm={setShowForm}
-        />
+      />
 
-        <BudgetsList 
-          showForm={showForm}
-          setShowForm={setShowForm}
-          dispatch={dispatch}
-          addBudgetAction={addBudgetAction}
-          loading={props.loading}
-          removeBudgetAction={removeBudgetAction}
-          budgets={props.budgets}
-        />
-        <BuddgetForm addBudgetAction={addBudgetAction} open={showForm} close={() => { setShowForm(false) }} />
-      </div>
-      {false && <div style={{ width: '100%', textAlign: 'center', height: 50, marginTop: 60}}> Some of my comercials banners </div>}
-     </div>);
+      <BudgetsList
+        showForm={showForm}
+        setShowForm={setShowForm}
+        dispatch={dispatch}
+        addBudgetAction={addBudgetAction}
+        loading={props.loading}
+        removeBudgetAction={removeBudgetAction}
+        budgets={props.budgets}
+      />
+      <BuddgetForm addBudgetAction={addBudgetAction} open={showForm} close={() => { setShowForm(false) }} />
+    </div>
+    {false && <div style={{ width: '100%', textAlign: 'center', height: 50, marginTop: 60 }}> Some of my comercials banners </div>}
+  </div>);
 };
 
 const mapStateToProps = (state) => {
-  return { 
+  return {
     budgets: state.budgets.budgets,
     loading: state.budgets.loading,
     selectedBudget: state.budgets.selectedBudget,
