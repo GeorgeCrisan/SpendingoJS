@@ -169,8 +169,8 @@ const Login = (props) => {
               name="email"
               onChange={(evt) => { setResetEmail(evt.target.value) }}
             />
-            <Button variant="outlined" size='large'  onClick={() => { setShowModal(false); }} > Cancel </Button>
             <Button variant="outlined" size='large'  color="primary" onClick={() => submitReset()} > Submit </Button>
+            <Button variant="outlined" size='large'  onClick={() => { setShowModal(false); }} > Cancel </Button>
           </div>}
         </Container>
       </Drawer>
