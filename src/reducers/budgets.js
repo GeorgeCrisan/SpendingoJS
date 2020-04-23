@@ -37,7 +37,7 @@ export default (state = {
         };
 
     case LOAD__BUDGET__SUCCESS:
-      console.log(action.payload, 'what now');
+      //console.log(action.payload, 'what now');
       return {
         ...state,
         budgets: action.payload,
