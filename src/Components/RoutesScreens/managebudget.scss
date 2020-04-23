@@ -29,8 +29,11 @@
     margin-top: 16px;
     height: 56px;
     width: 100%;
+    margin-left: auto;
     @include for-tablet-portrait-up {
       width: 10%;
+      margin: initial;
+      margin-top: 16px;
     }
   }
 }

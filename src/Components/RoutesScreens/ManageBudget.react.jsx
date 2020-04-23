@@ -50,9 +50,9 @@ function ManageBudget(props) {
                             <div className='entry__item__deep'>  {`${key + 1}. Added:`} <span style={{ marginRight: 8, color: '#2196F3'}}>{moment.unix(el.created / 1000).format('Do MM YYYY hh:mm')}</span></div> 
                             <div className='entry__item__deep'>  Description: <span style={{ marginRight: 8, color: '#2196F3', wordBreak: 'break-all'}} >{el.description} </span> </div> 
                             <div className='entry__item__deep'>  Value: <span style={{ marginRight: 8, color: '#2196F3'}}>  <Currency currency={sb.currency} /> {Number(el.value).toFixed(2)}</span> </div> 
-                            <div style={{display: 'flex', flexFlow: 'row nowrap'}}>
+                            <div onClick={() => { removeEntryAction(sb, el) }} style={{display: 'flex', flexFlow: 'row nowrap'}}>
                               <DeleteForeverOutlinedIcon 
-                              onClick={() => { removeEntryAction(sb, el) }}
+                              
                               className="delete__icon"
                               style={{ cursor: 'pointer', alignSelf: 'center', color: 'rgba(242, 94, 127 , 0.8)'}} />
                               <span style={{color: 'rgba(242, 94, 127 , 0.8)', position: 'relative', top: 20}} className='show__mobile__only' >Remove</span>
@@ -129,7 +129,7 @@ function ManageBudget(props) {
           <Paper elevation={4} className='current__budgetselected__paper' >
             <Container className={`current__budget__content`} style={{ display: 'flex' }} maxWidth="md">
               {<div style={{ width: '100%' }}>
-                <h2 style={{ color: '#2196f3', marginTop: 0 }}>
+                <h2 style={{ color: '#2196f3', marginTop: 16, marginBottom: 16 }}>
                   <CalendarViewDayOutlinedIcon style={{ marginRight: 8, color: '#2196f3', position: 'relative', top: 4 }} />
                   {'Manage budget entries'}
                 </h2>
@@ -187,7 +187,7 @@ function ManageBudget(props) {
                   <Button size='large' variant="outlined" disabled={(isValidTotal() || isValidLength('description', 100))} 
                     onClick={onAdd}
                    >
-                    {(!isValidTotal() && !isValidLength('description', 100)) ? <AddIcon style={{ fontSize: 16, marginRight: 6, color: '#4BB543' }} /> : <span style={{color: 'grey', fontSize: 12, position: 'relative', left: -6}}> Invalid </span>}
+                    {(!isValidTotal() && !isValidLength('description', 100)) ? <span style={{marginRight: 6, padding: 0, fontSize: 14, position: 'relative', left: -6}}> Add </span> : <span style={{color: 'grey', fontSize: 12, position: 'relative', left: -6}}> Invalid </span>}
                   </Button>
                 </div>
                 {prepEntries.length > 0 && prepEntries}
