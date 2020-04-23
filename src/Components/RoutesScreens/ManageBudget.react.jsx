@@ -92,7 +92,7 @@ function ManageBudget(props) {
 
     let value = Number(formState.value);
 
-    if (value >= 0 && value < (2 * Number(sb.total) - Math.abs(sb.progress))) {
+    if (value >= 0 && value <= (Number(sb.total) - Math.abs(sb.progress))) {
 
       return false;
     }
