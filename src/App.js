@@ -30,7 +30,7 @@ function App(props) {
         <Route path="/signup" component={Signup} />
         <Route path="/" component={FPContent} />
       </Switch>
-      <div className='footer'> <p>Made with <FavoriteBorderIcon style={{color: 'red'}} /> by <a style={{color: '#fff'}} href='www.georgecrisan.com'>georgecrisan.com</a></p></div>
+      <div className='footer'> <p>Made with <FavoriteBorderIcon style={{color: 'red'}} /> by <a style={{color: '#fff'}} href='https://www.georgecrisan.com'>georgecrisan.com</a></p></div>
       <CookieConsent
         location="bottom"
         buttonText="Agree"
